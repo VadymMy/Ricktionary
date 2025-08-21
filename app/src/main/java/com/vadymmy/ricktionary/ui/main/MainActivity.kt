@@ -1,25 +1,21 @@
-package com.vadymmy.ricktionary
+package com.vadymmy.ricktionary.ui.main
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
-import androidx.compose.ui.Modifier
+import com.vadymmy.ricktionary.ui.navigation.AppNavHost
 import com.vadymmy.ricktionary.ui.theme.RicktionaryTheme
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
             RicktionaryTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Text(modifier = Modifier.padding(innerPadding), text = "Hi, Rick!")
-                }
+                AppNavHost()
             }
         }
     }
