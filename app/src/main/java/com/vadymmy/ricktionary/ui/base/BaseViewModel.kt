@@ -2,18 +2,16 @@ package com.vadymmy.ricktionary.ui.base
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.vadymmy.ricktionary.domain.base.CoroutineLauncher
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.getAndUpdate
+import kotlinx.coroutines.launch
 
 abstract class BaseViewModel<STATE, INTENT, EFFECT : Any>(
     initialState: STATE
-) : ViewModel(), CoroutineLauncher {
-    override val scope: CoroutineScope = viewModelScope
+) : ViewModel() {
     protected abstract fun reduceIntent(intent: INTENT)
 
     val uiStateFlow: StateFlow<STATE> = MutableStateFlow(initialState)
@@ -22,5 +20,6 @@ abstract class BaseViewModel<STATE, INTENT, EFFECT : Any>(
 
     fun onUserIntent(intent: INTENT) = reduceIntent(intent)
     protected fun updateUiState(update: (STATE) -> STATE) = (uiStateFlow as MutableStateFlow).getAndUpdate(update)
-    protected fun sendUiEffect(effect: EFFECT) = launchCoroutine { (uiEffectFlow as MutableSharedFlow).emit(effect) }
+    protected fun sendUiEffect(effect: EFFECT) = launchViewModelScope { (uiEffectFlow as MutableSharedFlow).emit(effect) }
+    protected fun launchViewModelScope(action: suspend () -> Unit) = viewModelScope.launch { action() }
 }
