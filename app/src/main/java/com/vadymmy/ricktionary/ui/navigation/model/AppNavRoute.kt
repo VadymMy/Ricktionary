@@ -1,4 +1,4 @@
-package com.vadymmy.ricktionary.ui.navigation
+package com.vadymmy.ricktionary.ui.navigation.model
 
 import kotlinx.serialization.Serializable
 

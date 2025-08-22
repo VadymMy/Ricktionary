@@ -9,7 +9,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.getAndUpdate
 import kotlinx.coroutines.launch
 
-abstract class BaseViewModel<STATE, INTENT, EFFECT : Any>(
+abstract class BaseViewModel<STATE, INTENT, EFFECT>(
     initialState: STATE
 ) : ViewModel() {
     protected abstract fun reduceIntent(intent: INTENT)
