@@ -9,21 +9,21 @@ import com.vadymmy.ricktionary.domain.characters.model.CharacterLocation
 import com.vadymmy.ricktionary.domain.characters.model.CharacterOrigin
 import com.vadymmy.ricktionary.domain.characters.model.CharacterStatus
 
-fun List<CharacterDto>.toDomainModels(): List<Character> = this.map {
-    Character(
-        id = it.id,
-        name = it.name,
-        url = it.url,
-        status = it.status.toDomainModel(),
-        species = it.species,
-        type = it.type,
-        gender = it.gender,
-        origin = it.origin.toDomainModel(),
-        location = it.location.toDomainModel(),
-        imageUrl = it.imageUrl,
-        episodes = it.episodes
-    )
-}
+fun List<CharacterDto>.toDomainModels(): List<Character> = this.map { it.toDomainModel() }
+
+fun CharacterDto.toDomainModel(): Character = Character(
+    id = this.id,
+    name = this.name,
+    url = this.url,
+    status = this.status.toDomainModel(),
+    species = this.species,
+    type = this.type,
+    gender = this.gender,
+    origin = this.origin.toDomainModel(),
+    location = this.location.toDomainModel(),
+    imageUrl = this.imageUrl,
+    episodes = this.episodes
+)
 
 private fun CharacterStatusDto.toDomainModel(): CharacterStatus = when (this) {
     CharacterStatusDto.Alive -> CharacterStatus.Alive

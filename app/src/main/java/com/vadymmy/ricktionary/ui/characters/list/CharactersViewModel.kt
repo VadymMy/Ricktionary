@@ -1,6 +1,5 @@
 package com.vadymmy.ricktionary.ui.characters.list
 
-import com.vadymmy.ricktionary.domain.base.result.ResultObject
 import com.vadymmy.ricktionary.domain.characters.usecase.FetchCharactersUseCase
 import com.vadymmy.ricktionary.domain.characters.usecase.GetCharactersFlowUseCase
 import com.vadymmy.ricktionary.ui.base.BaseViewModel
@@ -57,7 +56,7 @@ class CharactersViewModel @Inject constructor(
             updateUiState {
                 it.copy(
                     isLoading = false,
-                    showLoadingError = fetchResult is ResultObject.Error
+                    showLoadingError = fetchResult.isFailure
                 )
             }
         }
