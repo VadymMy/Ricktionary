@@ -1,4 +1,4 @@
-package com.vadymmy.ricktionary.ui.characters.model
+package com.vadymmy.ricktionary.ui.characters.list.model
 
 import androidx.annotation.StringRes
 import androidx.compose.ui.graphics.Color

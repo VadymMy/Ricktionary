@@ -1,9 +1,9 @@
-package com.vadymmy.ricktionary.ui.characters.mapper
+package com.vadymmy.ricktionary.ui.characters.list.mapper
 
 import com.vadymmy.ricktionary.domain.characters.model.Character
 import com.vadymmy.ricktionary.domain.characters.model.CharacterStatus
-import com.vadymmy.ricktionary.ui.characters.model.CharacterStatusUiModel
-import com.vadymmy.ricktionary.ui.characters.model.CharacterItemUiModel
+import com.vadymmy.ricktionary.ui.characters.list.model.CharacterStatusUiModel
+import com.vadymmy.ricktionary.ui.characters.list.model.CharacterItemUiModel
 
 fun List<Character>.toUiModels() : List<CharacterItemUiModel> = this.map {
     CharacterItemUiModel(

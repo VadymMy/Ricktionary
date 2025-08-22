@@ -1,4 +1,4 @@
-package com.vadymmy.ricktionary.ui.characters.composable
+package com.vadymmy.ricktionary.ui.characters.list.composable
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -16,7 +16,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
-import com.vadymmy.ricktionary.ui.characters.model.CharacterStatusUiModel
+import com.vadymmy.ricktionary.ui.characters.list.model.CharacterStatusUiModel
 import com.vadymmy.ricktionary.ui.theme.Typography
 import com.vadymmy.ricktionary.ui.theme.borderWidthDefault
 import com.vadymmy.ricktionary.ui.theme.margin1X

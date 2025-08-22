@@ -1,4 +1,4 @@
-package com.vadymmy.ricktionary.ui.characters
+package com.vadymmy.ricktionary.ui.characters.list
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
@@ -16,8 +16,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.vadymmy.ricktionary.R
-import com.vadymmy.ricktionary.ui.characters.composable.CharactersList
-import com.vadymmy.ricktionary.ui.characters.preview.CharacterItemsPreview
+import com.vadymmy.ricktionary.ui.characters.list.composable.CharactersList
+import com.vadymmy.ricktionary.ui.characters.list.preview.CharacterItemsPreview
 import com.vadymmy.ricktionary.ui.core.LifecycleEffect
 import com.vadymmy.ricktionary.ui.core.composable.FeedbackState
 import com.vadymmy.ricktionary.ui.core.composable.TopBarScaffold

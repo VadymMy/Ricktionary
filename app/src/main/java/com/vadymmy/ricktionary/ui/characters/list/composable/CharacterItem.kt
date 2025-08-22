@@ -1,4 +1,4 @@
-package com.vadymmy.ricktionary.ui.characters.composable
+package com.vadymmy.ricktionary.ui.characters.list.composable
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -19,8 +19,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import coil.compose.AsyncImage
 import com.vadymmy.ricktionary.R
-import com.vadymmy.ricktionary.ui.characters.model.CharacterItemUiModel
-import com.vadymmy.ricktionary.ui.characters.preview.CharacterItemsPreview
+import com.vadymmy.ricktionary.ui.characters.list.model.CharacterItemUiModel
+import com.vadymmy.ricktionary.ui.characters.list.preview.CharacterItemsPreview
 import com.vadymmy.ricktionary.ui.theme.AppColors
 import com.vadymmy.ricktionary.ui.theme.Typography
 import com.vadymmy.ricktionary.ui.theme.cardContainerShapeDefault

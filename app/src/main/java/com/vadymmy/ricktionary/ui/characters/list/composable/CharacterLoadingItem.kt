@@ -1,4 +1,4 @@
-package com.vadymmy.ricktionary.ui.characters.composable
+package com.vadymmy.ricktionary.ui.characters.list.composable
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box

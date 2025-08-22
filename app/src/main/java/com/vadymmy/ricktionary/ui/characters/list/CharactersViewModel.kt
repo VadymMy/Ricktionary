@@ -1,10 +1,10 @@
-package com.vadymmy.ricktionary.ui.characters
+package com.vadymmy.ricktionary.ui.characters.list
 
 import com.vadymmy.ricktionary.domain.base.result.ResultObject
 import com.vadymmy.ricktionary.domain.characters.usecase.FetchCharactersUseCase
 import com.vadymmy.ricktionary.domain.characters.usecase.GetCharactersFlowUseCase
 import com.vadymmy.ricktionary.ui.base.BaseViewModel
-import com.vadymmy.ricktionary.ui.characters.mapper.toUiModels
+import com.vadymmy.ricktionary.ui.characters.list.mapper.toUiModels
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collectLatest
 import javax.inject.Inject

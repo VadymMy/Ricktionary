@@ -6,7 +6,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.vadymmy.ricktionary.ui.characters.CharactersScreen
+import com.vadymmy.ricktionary.ui.characters.list.CharactersScreen
 import com.vadymmy.ricktionary.ui.navigation.model.AppNavRoute
 import com.vadymmy.ricktionary.ui.navigation.model.NavigationEffect
 import kotlinx.coroutines.flow.collectLatest

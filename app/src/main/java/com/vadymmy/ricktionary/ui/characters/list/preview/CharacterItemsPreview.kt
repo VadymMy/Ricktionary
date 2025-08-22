@@ -1,7 +1,7 @@
-package com.vadymmy.ricktionary.ui.characters.preview
+package com.vadymmy.ricktionary.ui.characters.list.preview
 
-import com.vadymmy.ricktionary.ui.characters.model.CharacterItemUiModel
-import com.vadymmy.ricktionary.ui.characters.model.CharacterStatusUiModel
+import com.vadymmy.ricktionary.ui.characters.list.model.CharacterItemUiModel
+import com.vadymmy.ricktionary.ui.characters.list.model.CharacterStatusUiModel
 
 object CharacterItemsPreview {
     val characterItems = listOf(

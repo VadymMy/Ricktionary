@@ -1,12 +1,12 @@
-package com.vadymmy.ricktionary.ui.characters.composable
+package com.vadymmy.ricktionary.ui.characters.list.composable
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
-import com.vadymmy.ricktionary.ui.characters.model.CharacterItemUiModel
-import com.vadymmy.ricktionary.ui.characters.preview.CharacterItemsPreview
+import com.vadymmy.ricktionary.ui.characters.list.model.CharacterItemUiModel
+import com.vadymmy.ricktionary.ui.characters.list.preview.CharacterItemsPreview
 import com.vadymmy.ricktionary.ui.theme.margin1X
 
 private const val LOADING_ITEMS_SIZE = 10
