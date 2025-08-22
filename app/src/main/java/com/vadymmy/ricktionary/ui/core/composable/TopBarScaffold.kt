@@ -1,4 +1,4 @@
-package com.vadymmy.ricktionary.ui.core
+package com.vadymmy.ricktionary.ui.core.composable
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement

@@ -18,7 +18,7 @@ import com.vadymmy.ricktionary.ui.characters.composable.CharactersEmptyState
 import com.vadymmy.ricktionary.ui.characters.composable.CharactersList
 import com.vadymmy.ricktionary.ui.characters.preview.CharacterItemsPreview
 import com.vadymmy.ricktionary.ui.core.LifecycleEffect
-import com.vadymmy.ricktionary.ui.core.TopBarScaffold
+import com.vadymmy.ricktionary.ui.core.composable.TopBarScaffold
 import com.vadymmy.ricktionary.ui.theme.AppColors
 import com.vadymmy.ricktionary.ui.theme.margin1X
 
@@ -50,7 +50,7 @@ private fun CharactersScreenContent(
             CharactersEmptyState()
         },
         content = {
-            CharactersList(characters = uiState.characters)
+            CharactersList(isLoading = uiState.isLoading, characters = uiState.characters)
         }
     )
 }
@@ -59,8 +59,9 @@ private fun CharactersScreenContent(
 private fun CharactersScreenScaffold(
     uiState: CharactersUiState,
     topBar: @Composable () -> Unit = {},
+    content: @Composable () -> Unit = {},
     emptyState: @Composable () -> Unit = {},
-    content: @Composable () -> Unit = {}
+    errorState: @Composable () -> Unit = {}
 ) {
     Scaffold { paddingValues ->
         Column(
@@ -75,10 +76,18 @@ private fun CharactersScreenScaffold(
                     .fillMaxSize()
                     .padding(margin1X)
             ) {
-                if (uiState.characters.isEmpty()) {
-                    emptyState()
-                } else {
-                    content()
+                when {
+                    uiState.showLoadingError -> {
+                        errorState()
+                    }
+
+                    uiState.isLoading || uiState.characters.isNotEmpty() -> {
+                        content()
+                    }
+
+                    else -> {
+                        emptyState()
+                    }
                 }
             }
         }
@@ -89,6 +98,12 @@ private fun CharactersScreenScaffold(
 @Preview
 private fun EmptyCharactersScreenPreview() {
     CharactersScreenContent(uiState = CharactersUiState())
+}
+
+@Composable
+@Preview
+private fun LoadingCharactersScreenPreview() {
+    CharactersScreenContent(uiState = CharactersUiState(isLoading = true))
 }
 
 @Composable

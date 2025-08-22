@@ -28,6 +28,7 @@ val topBarImageSize = 24.dp
 // Containers
 val pillContainerHeight = 24.dp
 val topBarHeight = 56.dp
+val characterItemContainerHeight = 124.dp
 
 // Other items
 val statusPillCircleSize = 10.dp

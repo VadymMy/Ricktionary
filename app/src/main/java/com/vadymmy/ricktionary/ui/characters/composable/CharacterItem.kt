@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
@@ -23,6 +24,7 @@ import com.vadymmy.ricktionary.ui.characters.preview.CharacterItemsPreview
 import com.vadymmy.ricktionary.ui.theme.AppColors
 import com.vadymmy.ricktionary.ui.theme.Typography
 import com.vadymmy.ricktionary.ui.theme.cardContainerShapeDefault
+import com.vadymmy.ricktionary.ui.theme.characterItemContainerHeight
 import com.vadymmy.ricktionary.ui.theme.characterItemImageSize
 import com.vadymmy.ricktionary.ui.theme.margin1X
 import com.vadymmy.ricktionary.ui.theme.margin1_5X
@@ -33,7 +35,9 @@ fun CharacterItem(item: CharacterItemUiModel) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
+            .height(characterItemContainerHeight)
             .background(color = AppColors.ItemBackground, shape = cardContainerShapeDefault)
+            .clip(shape = cardContainerShapeDefault)
             .padding(margin1_5X)
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
@@ -80,11 +84,9 @@ private fun LocationText(location: String) {
 @Composable
 @Preview
 private fun CharacterItemPreview() {
-
     Column(verticalArrangement = Arrangement.spacedBy(margin1X)) {
         CharacterItemsPreview.characterItems.forEach {
             CharacterItem(item = it)
         }
     }
-
 }
