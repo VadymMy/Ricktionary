@@ -14,7 +14,7 @@ data class CharacterDto(
     @SerializedName("type")
     val type: String,
     @SerializedName("gender")
-    val gender: String,
+    val gender: CharacterGenderDto,
     @SerializedName("origin")
     val origin: CharacterOriginDto,
     @SerializedName("location")
