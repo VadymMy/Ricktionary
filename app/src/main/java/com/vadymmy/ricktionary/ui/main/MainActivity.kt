@@ -6,7 +6,6 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import com.vadymmy.ricktionary.ui.navigation.AppNavHost
 import com.vadymmy.ricktionary.ui.navigation.AppNavigator
-import com.vadymmy.ricktionary.ui.theme.RicktionaryTheme
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -19,9 +18,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            RicktionaryTheme {
-                AppNavHost(appNavigator = appNavigator)
-            }
+            AppNavHost(appNavigator = appNavigator)
         }
     }
 }

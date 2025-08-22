@@ -18,6 +18,8 @@ abstract class BaseViewModel<STATE, INTENT, EFFECT>(
     val uiEffectFlow: SharedFlow<EFFECT> = MutableSharedFlow()
     protected val uiState get() = uiStateFlow.value
 
+    open fun onResume() = Unit
+
     fun onUserIntent(intent: INTENT) = reduceIntent(intent)
     protected fun updateUiState(update: (STATE) -> STATE) = (uiStateFlow as MutableStateFlow).getAndUpdate(update)
     protected fun sendUiEffect(effect: EFFECT) = launchViewModelScope { (uiEffectFlow as MutableSharedFlow).emit(effect) }
