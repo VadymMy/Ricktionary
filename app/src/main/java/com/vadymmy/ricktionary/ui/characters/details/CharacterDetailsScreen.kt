@@ -1,17 +1,32 @@
 package com.vadymmy.ricktionary.ui.characters.details
 
-import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
 
 @Composable
 fun CharacterDetailsScreen(
-    id: Int,
     characterDetailsViewModel: CharacterDetailsViewModel = hiltViewModel()
 ) {
-    Box(Modifier.fillMaxSize()) {
+    val uiState by characterDetailsViewModel.uiStateFlow.collectAsState()
 
-    }
+    CharacterDetailsScreenContent(
+        uiState = uiState,
+        onUserIntent = characterDetailsViewModel::onUserIntent
+    )
+}
+
+@Composable
+private fun CharacterDetailsScreenContent(
+    uiState: CharacterDetailsUiState,
+    onUserIntent: (CharacterDetailsIntent) -> Unit
+) {
+    Text(text = uiState.character?.name ?: "ERR")
+}
+
+@Composable
+private fun CharacterDetailsScreenScaffold() {
+
 }

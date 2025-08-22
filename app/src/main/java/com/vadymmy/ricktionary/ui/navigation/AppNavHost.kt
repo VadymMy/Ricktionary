@@ -28,7 +28,7 @@ fun AppNavHost(appNavigator: AppNavigator) {
         }
 
         composable<AppNavRoute.CharacterDetails> {
-            CharacterDetailsScreen(id = it.toRoute<AppNavRoute.CharacterDetails>().id)
+            CharacterDetailsScreen()
         }
     }
 }

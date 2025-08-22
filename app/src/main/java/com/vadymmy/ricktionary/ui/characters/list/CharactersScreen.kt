@@ -36,7 +36,7 @@ fun CharactersScreen(charactersViewModel: CharactersViewModel = hiltViewModel())
 
     CharactersScreenContent(
         uiState = uiState,
-        onUserIntent = { charactersViewModel.onUserIntent(intent = it) }
+        onUserIntent = charactersViewModel::onUserIntent
     )
 }
 
