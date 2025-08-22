@@ -1,11 +1,11 @@
 package com.vadymmy.ricktionary.ui.characters
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
@@ -15,8 +15,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.vadymmy.ricktionary.R
 import com.vadymmy.ricktionary.ui.characters.composable.CharactersEmptyState
+import com.vadymmy.ricktionary.ui.characters.composable.CharactersList
+import com.vadymmy.ricktionary.ui.characters.preview.CharacterItemsPreview
 import com.vadymmy.ricktionary.ui.core.LifecycleEffect
 import com.vadymmy.ricktionary.ui.core.TopBarScaffold
+import com.vadymmy.ricktionary.ui.theme.AppColors
+import com.vadymmy.ricktionary.ui.theme.margin1X
 
 @Composable
 fun CharactersScreen(charactersViewModel: CharactersViewModel = hiltViewModel()) {
@@ -46,7 +50,7 @@ private fun CharactersScreenContent(
             CharactersEmptyState()
         },
         content = {
-            Text("List of characters here will be soon!")
+            CharactersList(characters = uiState.characters)
         }
     )
 }
@@ -59,13 +63,17 @@ private fun CharactersScreenScaffold(
     content: @Composable () -> Unit = {}
 ) {
     Scaffold { paddingValues ->
-        Column {
+        Column(
+            modifier = Modifier
+                .background(color = AppColors.Background)
+                .padding(paddingValues)
+        ) {
             topBar()
 
             Box(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(paddingValues)
+                    .padding(margin1X)
             ) {
                 if (uiState.characters.isEmpty()) {
                     emptyState()
@@ -81,4 +89,14 @@ private fun CharactersScreenScaffold(
 @Preview
 private fun EmptyCharactersScreenPreview() {
     CharactersScreenContent(uiState = CharactersUiState())
+}
+
+@Composable
+@Preview
+private fun CharactersScreenPreview() {
+    CharactersScreenContent(
+        uiState = CharactersUiState(
+            characters = CharacterItemsPreview.characterItems
+        )
+    )
 }

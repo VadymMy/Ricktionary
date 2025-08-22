@@ -25,25 +25,25 @@ import com.vadymmy.ricktionary.ui.theme.Typography
 import com.vadymmy.ricktionary.ui.theme.cardContainerShapeDefault
 import com.vadymmy.ricktionary.ui.theme.characterItemImageSize
 import com.vadymmy.ricktionary.ui.theme.margin1X
+import com.vadymmy.ricktionary.ui.theme.margin1_5X
 import com.vadymmy.ricktionary.ui.theme.marginHalf
-import com.vadymmy.ricktionary.ui.theme.shapeImageDefault
 
 @Composable
-fun CharacterItem(itemUiModel: CharacterItemUiModel) {
+fun CharacterItem(item: CharacterItemUiModel) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .background(color = AppColors.ItemBackground, shape = cardContainerShapeDefault)
-            .padding(margin1X)
+            .padding(margin1_5X)
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
             AsyncImage(
                 modifier = Modifier
                     .size(characterItemImageSize)
-                    .background(color = AppColors.Background, shape = shapeImageDefault)
-                    .clip(shapeImageDefault),
-                model = itemUiModel.imageUrl,
-                contentDescription = itemUiModel.name,
+                    .background(color = AppColors.Background, shape = cardContainerShapeDefault)
+                    .clip(cardContainerShapeDefault),
+                model = item.imageUrl,
+                contentDescription = item.name,
                 contentScale = ContentScale.Inside,
                 placeholder = painterResource(id = R.drawable.ic_person_loading_placeholder),
                 error = painterResource(id = R.drawable.ic_person_loading_placeholder)
@@ -53,9 +53,9 @@ fun CharacterItem(itemUiModel: CharacterItemUiModel) {
                 modifier = Modifier.padding(margin1X),
                 verticalArrangement = Arrangement.spacedBy(margin1X)
             ) {
-                Text(text = itemUiModel.name, style = Typography.bodyLarge, color = AppColors.TextPrimary)
-                LocationText(location = itemUiModel.location)
-                CharacterStatusPill(statusUiModel = itemUiModel.status)
+                Text(text = item.name, style = Typography.bodyLarge, color = AppColors.TextPrimary)
+                LocationText(location = item.location)
+                CharacterStatusPill(statusUiModel = item.status)
             }
         }
     }
@@ -83,7 +83,7 @@ private fun CharacterItemPreview() {
 
     Column(verticalArrangement = Arrangement.spacedBy(margin1X)) {
         CharacterItemsPreview.characterItems.forEach {
-            CharacterItem(itemUiModel = it)
+            CharacterItem(item = it)
         }
     }
 

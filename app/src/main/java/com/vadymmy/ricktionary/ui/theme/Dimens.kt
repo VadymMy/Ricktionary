@@ -6,6 +6,7 @@ import androidx.compose.ui.unit.sp
 // Margin
 val marginHalf = 4.dp
 val margin1X = 8.dp
+val margin1_5X = 12.dp
 val margin2X = 16.dp
 val margin3X = 24.dp
 val margin4X = 32.dp
