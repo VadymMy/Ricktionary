@@ -6,6 +6,8 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.toRoute
+import com.vadymmy.ricktionary.ui.characters.details.CharacterDetailsScreen
 import com.vadymmy.ricktionary.ui.characters.list.CharactersScreen
 import com.vadymmy.ricktionary.ui.navigation.model.AppNavRoute
 import com.vadymmy.ricktionary.ui.navigation.model.NavigationEffect
@@ -23,6 +25,10 @@ fun AppNavHost(appNavigator: AppNavigator) {
     ) {
         composable<AppNavRoute.Characters> {
             CharactersScreen()
+        }
+
+        composable<AppNavRoute.CharacterDetails> {
+            CharacterDetailsScreen(id = it.toRoute<AppNavRoute.CharacterDetails>().id)
         }
     }
 }

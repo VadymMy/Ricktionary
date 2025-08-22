@@ -8,11 +8,11 @@ import javax.inject.Inject
 class AppNavigatorImpl @Inject constructor() : AppNavigator {
     override val navigationEffect = MutableSharedFlow<NavigationEffect>()
 
-    override fun navigateTo(route: AppNavRoute) {
-        navigationEffect.tryEmit(NavigationEffect.Navigate(route))
+    override suspend fun navigateTo(route: AppNavRoute) {
+        navigationEffect.emit(NavigationEffect.Navigate(route))
     }
 
-    override fun back() {
-        navigationEffect.tryEmit(NavigationEffect.Back)
+    override suspend fun back() {
+        navigationEffect.emit(NavigationEffect.Back)
     }
 }

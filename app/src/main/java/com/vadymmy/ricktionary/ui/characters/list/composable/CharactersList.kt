@@ -14,7 +14,8 @@ private const val LOADING_ITEMS_SIZE = 10
 @Composable
 fun CharactersList(
     isLoading: Boolean,
-    characters: List<CharacterItemUiModel>
+    characters: List<CharacterItemUiModel>,
+    onCharacterClicked: (CharacterItemUiModel) -> Unit = {}
 ) {
     LazyColumn(verticalArrangement = Arrangement.spacedBy(margin1X)) {
         if (isLoading) {
@@ -23,7 +24,10 @@ fun CharactersList(
             }
         } else {
             items(characters, key = { it.id }) { character ->
-                CharacterItem(item = character)
+                CharacterItem(
+                    item = character,
+                    onClick = { onCharacterClicked(character) }
+                )
             }
         }
     }
@@ -32,11 +36,17 @@ fun CharactersList(
 @Composable
 @Preview
 private fun CharactersListLoadingPreview() {
-    CharactersList(isLoading = true, characters = emptyList())
+    CharactersList(
+        isLoading = true,
+        characters = emptyList()
+    )
 }
 
 @Composable
 @Preview
 private fun CharactersListPreview() {
-    CharactersList(isLoading = false, characters = CharacterItemsPreview.characterItems)
+    CharactersList(
+        isLoading = false,
+        characters = CharacterItemsPreview.characterItems
+    )
 }

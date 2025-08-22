@@ -1,6 +1,7 @@
 package com.vadymmy.ricktionary.ui.characters.list.composable
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -31,13 +32,17 @@ import com.vadymmy.ricktionary.ui.theme.margin1_5X
 import com.vadymmy.ricktionary.ui.theme.marginHalf
 
 @Composable
-fun CharacterItem(item: CharacterItemUiModel) {
+fun CharacterItem(
+    item: CharacterItemUiModel,
+    onClick: () -> Unit = {}
+) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
             .height(characterItemContainerHeight)
             .background(color = AppColors.ItemBackground, shape = cardContainerShapeDefault)
             .clip(shape = cardContainerShapeDefault)
+            .clickable(onClick = onClick)
             .padding(margin1_5X)
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {

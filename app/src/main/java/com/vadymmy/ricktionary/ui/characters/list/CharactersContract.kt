@@ -8,4 +8,6 @@ data class CharactersUiState(
     val characters: List<CharacterItemUiModel> = emptyList()
 )
 
-sealed interface CharactersIntent
+sealed interface CharactersIntent {
+    data class CharacterItemClicked(val character: CharacterItemUiModel) : CharactersIntent
+}

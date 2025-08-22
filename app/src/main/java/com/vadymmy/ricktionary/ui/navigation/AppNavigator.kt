@@ -6,6 +6,6 @@ import kotlinx.coroutines.flow.SharedFlow
 
 interface AppNavigator {
     val navigationEffect: SharedFlow<NavigationEffect>
-    fun navigateTo(route: AppNavRoute)
-    fun back()
+    suspend fun navigateTo(route: AppNavRoute)
+    suspend fun back()
 }

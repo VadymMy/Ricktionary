@@ -53,7 +53,10 @@ private fun CharactersScreenContent(
         content = {
             CharactersList(
                 isLoading = uiState.isLoading,
-                characters = uiState.characters
+                characters = uiState.characters,
+                onCharacterClicked = {
+                    onUserIntent(CharactersIntent.CharacterItemClicked(it))
+                }
             )
         },
         emptyState = {
@@ -117,7 +120,7 @@ private fun CharactersScreenScaffold(
 @Composable
 @Preview
 private fun EmptyCharactersScreenPreview() {
-    CharactersScreenContent(uiState = CharactersUiState())
+    CharactersScreenContent(uiState = CharactersUiState(isLoading = false))
 }
 
 @Composable
@@ -131,6 +134,7 @@ private fun LoadingCharactersScreenPreview() {
 private fun CharactersScreenPreview() {
     CharactersScreenContent(
         uiState = CharactersUiState(
+            isLoading = false,
             characters = CharacterItemsPreview.characterItems
         )
     )
