@@ -1,30 +1,38 @@
-package com.vadymmy.ricktionary.ui.characters.composable
+package com.vadymmy.ricktionary.ui.core.composable
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.vadymmy.ricktionary.R
 import com.vadymmy.ricktionary.ui.theme.Typography
-import com.vadymmy.ricktionary.ui.theme.emptyStateImageHeight
 import com.vadymmy.ricktionary.ui.theme.margin2X
+import com.vadymmy.ricktionary.ui.theme.topBarImageSize
 
 @Composable
-fun CharactersEmptyState() {
+fun FeedbackState(
+    modifier: Modifier = Modifier,
+    imageModifier: Modifier = Modifier,
+    title: String,
+    subtitle: String,
+    painter: Painter
+) {
     Box(
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
             .padding(margin2X),
         contentAlignment = Alignment.Center
@@ -34,30 +42,29 @@ fun CharactersEmptyState() {
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             Image(
-                modifier = Modifier
-                    .padding(bottom = margin2X)
-                    .height(emptyStateImageHeight),
-                painter = painterResource(id = R.drawable.ic_portal),
-                contentDescription = stringResource(id = R.string.empty_state_title)
+                modifier = imageModifier,
+                painter = painter,
+                contentDescription = title
             )
 
-            Text(
-                text = stringResource(id = R.string.empty_state_title),
-                style = Typography.titleMedium
-            )
+            Spacer(modifier = Modifier.height(margin2X))
 
-            Text(
-                text = stringResource(id = R.string.empty_state_subtitle),
-                style = Typography.bodyLarge
-            )
+            Text(text = title, style = Typography.titleMedium)
+
+            Text(text = subtitle, style = Typography.bodyLarge)
         }
     }
 }
 
 @Composable
 @Preview
-private fun CharactersEmptyStatePreview() {
+private fun FeedbackStatePreview() {
     Box(modifier = Modifier.background(color = Color.White)) {
-        CharactersEmptyState()
+        FeedbackState(
+            imageModifier = Modifier.size(topBarImageSize),
+            title = "Location unknown",
+            subtitle = "Please try again.",
+            painter = painterResource(id = R.drawable.ic_location)
+        )
     }
 }

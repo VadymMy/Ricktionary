@@ -22,6 +22,7 @@ val textSizeLarge = 24.sp
 
 // Images
 val emptyStateImageHeight = 180.dp
+val errorStateImageHeight = 100.dp
 val characterItemImageSize = 100.dp
 val topBarImageSize = 24.dp
 

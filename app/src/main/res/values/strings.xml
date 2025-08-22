@@ -8,6 +8,10 @@
     <string name="empty_state_title">No characters found</string>
     <string name="empty_state_subtitle">This corner of the multiverse is empty.</string>
 
+    <!-- Characters Error State -->
+    <string name="error_state_title">Can’t fetch characters</string>
+    <string name="error_state_subtitle">Maybe Morty unplugged the cable?</string>
+
     <!-- Character -->
     <string name="character_status_alive">Alive</string>
     <string name="character_status_dead">Dead</string>

@@ -14,15 +14,13 @@ class CharactersViewModel @Inject constructor(
     private val getCharactersFlowUseCase: GetCharactersFlowUseCase,
     private val fetchCharactersUseCase: FetchCharactersUseCase
 ) : BaseViewModel<CharactersUiState, CharactersIntent, Nothing>(CharactersUiState()) {
+
     init {
         observeCharactersFlow()
     }
 
     override fun onResume() {
-        launchViewModelScope {
-            val fetchResult = fetchCharactersUseCase()
-            handleFetchResult(fetchResult)
-        }
+        fetchCharacters()
     }
 
     override fun reduceIntent(intent: CharactersIntent) {
@@ -39,12 +37,20 @@ class CharactersViewModel @Inject constructor(
         }
     }
 
-    private fun handleFetchResult(resultObject: ResultObject<Unit>) {
+    private fun fetchCharacters() {
         updateUiState {
-            it.copy(
-                isLoading = false,
-                showLoadingError = resultObject is ResultObject.Error
-            )
+            it.copy(isLoading = true)
+        }
+
+        launchViewModelScope {
+            val fetchResult = fetchCharactersUseCase()
+
+            updateUiState {
+                it.copy(
+                    isLoading = false,
+                    showLoadingError = fetchResult is ResultObject.Error
+                )
+            }
         }
     }
 }
