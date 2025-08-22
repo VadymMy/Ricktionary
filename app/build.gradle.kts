@@ -66,6 +66,7 @@ dependencies {
 
     // DI
     implementation(libs.hilt.android)
+    implementation(libs.hilt.navigation.compose)
     ksp(libs.hilt.compiler)
 
     // Network
@@ -76,4 +77,7 @@ dependencies {
 
     // Serialization
     implementation(libs.kotlinx.serialization.json)
+
+    // Images
+    implementation(libs.coil.compose)
 }

@@ -13,10 +13,11 @@ import okhttp3.HttpUrl.Companion.toHttpUrl
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
+import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Named
 import javax.inject.Singleton
 
-private const val CHARACTERS_API_BASE_URL = "https://rickandmortyapi.com/api"
+private const val CHARACTERS_API_BASE_URL = "https://rickandmortyapi.com/api/"
 private const val CHARACTERS_API_BASE_URL_NAME = "characters_api_base_url_name"
 
 private const val CHARACTERS_RETROFIT = "characters_retrofit"
@@ -41,6 +42,10 @@ class NetworkModule {
         .Builder()
         .addInterceptor(loggingInterceptor)
         .build()
+
+    @Provides
+    @Singleton
+    fun provideConverterFactory(): GsonConverterFactory = GsonConverterFactory.create()
 
     @Provides
     @Singleton
