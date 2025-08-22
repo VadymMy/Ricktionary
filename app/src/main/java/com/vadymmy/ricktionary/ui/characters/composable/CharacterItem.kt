@@ -49,8 +49,8 @@ fun CharacterItem(item: CharacterItemUiModel) {
                 model = item.imageUrl,
                 contentDescription = item.name,
                 contentScale = ContentScale.Inside,
-                placeholder = painterResource(id = R.drawable.ic_person_loading_placeholder),
-                error = painterResource(id = R.drawable.ic_person_loading_placeholder)
+                placeholder = painterResource(id = R.drawable.ic_character_placeholder),
+                error = painterResource(id = R.drawable.ic_character_placeholder)
             )
 
             Column(
