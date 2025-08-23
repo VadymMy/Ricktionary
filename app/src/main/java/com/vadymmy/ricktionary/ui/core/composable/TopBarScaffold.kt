@@ -33,8 +33,7 @@ fun TopBarScaffold(
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .height(topBarHeight)
-            .padding(margin1X),
+            .height(topBarHeight),
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.spacedBy(margin1X)
     ) {
