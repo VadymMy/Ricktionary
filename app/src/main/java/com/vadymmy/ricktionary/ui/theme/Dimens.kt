@@ -23,14 +23,14 @@ val textSizeLarge = 24.sp
 // Images
 val emptyStateImageHeight = 180.dp
 val errorStateImageHeight = 100.dp
-val characterItemImageSize = 100.dp
+val characterItemImageSize = 120.dp
+val characterDetailsImageHeight = 300.dp
 val genderPillImageSize = 10.dp
 val topBarImageSize = 24.dp
 
 // Containers
 val pillContainerHeight = 24.dp
 val topBarHeight = 56.dp
-val characterItemContainerHeight = 124.dp
 
 // Other items
 val statusPillCircleSize = 10.dp

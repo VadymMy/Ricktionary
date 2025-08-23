@@ -5,7 +5,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -23,34 +22,29 @@ import com.vadymmy.ricktionary.ui.characters.common.composable.CharacterImage
 import com.vadymmy.ricktionary.ui.characters.common.composable.CharacterStatusPill
 import com.vadymmy.ricktionary.ui.characters.list.model.CharacterItemUiModel
 import com.vadymmy.ricktionary.ui.characters.common.preview.CharacterPreview
+import com.vadymmy.ricktionary.ui.core.composable.ItemCard
 import com.vadymmy.ricktionary.ui.theme.AppColors
 import com.vadymmy.ricktionary.ui.theme.Typography
-import com.vadymmy.ricktionary.ui.theme.cardContainerShapeDefault
-import com.vadymmy.ricktionary.ui.theme.characterItemContainerHeight
 import com.vadymmy.ricktionary.ui.theme.characterItemImageSize
 import com.vadymmy.ricktionary.ui.theme.margin1X
-import com.vadymmy.ricktionary.ui.theme.margin1_5X
 import com.vadymmy.ricktionary.ui.theme.marginHalf
+import com.vadymmy.ricktionary.ui.theme.shapeCharacterCardImage
 
 @Composable
 fun CharacterItem(
     item: CharacterItemUiModel,
     onClick: () -> Unit = {}
 ) {
-    Row(
+    ItemCard(
         modifier = Modifier
-            .fillMaxWidth()
-            .height(characterItemContainerHeight)
-            .background(color = AppColors.ItemBackground, shape = cardContainerShapeDefault)
-            .clip(shape = cardContainerShapeDefault)
+            .height(characterItemImageSize)
             .clickable(onClick = onClick)
-            .padding(margin1_5X)
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
             CharacterImage(
                 modifier = Modifier
-                    .background(color = AppColors.Background, shape = cardContainerShapeDefault)
-                    .clip(cardContainerShapeDefault)
+                    .background(color = AppColors.Background, shape = shapeCharacterCardImage)
+                    .clip(shapeCharacterCardImage)
                     .size(characterItemImageSize),
                 imageUrl = item.imageUrl,
                 contentDescription = item.name
@@ -64,7 +58,10 @@ fun CharacterItem(
 
                 LocationText(location = item.location)
 
-                Row(horizontalArrangement = Arrangement.spacedBy(margin1X)) {
+                Row(
+                    modifier = Modifier.padding(top = margin1X),
+                    horizontalArrangement = Arrangement.spacedBy(margin1X)
+                ) {
                     CharacterStatusPill(status = item.status)
                     CharacterGenderPill(gender = item.gender)
                 }

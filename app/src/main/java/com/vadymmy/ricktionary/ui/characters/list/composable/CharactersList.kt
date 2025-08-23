@@ -8,6 +8,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.vadymmy.ricktionary.ui.characters.list.model.CharacterItemUiModel
 import com.vadymmy.ricktionary.ui.characters.common.preview.CharacterPreview
 import com.vadymmy.ricktionary.ui.theme.margin1X
+import com.vadymmy.ricktionary.ui.theme.margin1_5X
+import com.vadymmy.ricktionary.ui.theme.margin2X
 
 private const val LOADING_ITEMS_SIZE = 10
 
@@ -17,7 +19,7 @@ fun CharactersList(
     characters: List<CharacterItemUiModel>,
     onCharacterClicked: (CharacterItemUiModel) -> Unit = {}
 ) {
-    LazyColumn(verticalArrangement = Arrangement.spacedBy(margin1X)) {
+    LazyColumn(verticalArrangement = Arrangement.spacedBy(margin2X)) {
         if (isLoading) {
             items(LOADING_ITEMS_SIZE) {
                 CharacterLoadingItem()
