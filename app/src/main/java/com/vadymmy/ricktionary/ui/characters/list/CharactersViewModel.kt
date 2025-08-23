@@ -22,7 +22,9 @@ class CharactersViewModel @Inject constructor(
     }
 
     override fun onCreate() {
-        fetchCharacters()
+        if (uiState.characters.isEmpty()) {
+            fetchCharacters()
+        }
     }
 
     override fun reduceIntent(intent: CharactersIntent) {
