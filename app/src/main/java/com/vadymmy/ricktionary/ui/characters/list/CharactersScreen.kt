@@ -17,7 +17,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.vadymmy.ricktionary.R
 import com.vadymmy.ricktionary.ui.characters.list.composable.CharactersList
-import com.vadymmy.ricktionary.ui.characters.list.preview.CharacterItemsPreview
+import com.vadymmy.ricktionary.ui.characters.common.preview.CharacterPreview
 import com.vadymmy.ricktionary.ui.core.LifecycleEffect
 import com.vadymmy.ricktionary.ui.core.composable.FeedbackState
 import com.vadymmy.ricktionary.ui.core.composable.TopBarScaffold
@@ -135,7 +135,7 @@ private fun CharactersScreenPreview() {
     CharactersScreenContent(
         uiState = CharactersUiState(
             isLoading = false,
-            characters = CharacterItemsPreview.characterItems
+            characters = CharacterPreview.characterItems
         )
     )
 }

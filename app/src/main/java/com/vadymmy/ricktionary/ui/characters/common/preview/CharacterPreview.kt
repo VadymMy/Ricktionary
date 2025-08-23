@@ -1,10 +1,24 @@
-package com.vadymmy.ricktionary.ui.characters.list.preview
+package com.vadymmy.ricktionary.ui.characters.common.preview
 
 import com.vadymmy.ricktionary.ui.characters.common.model.CharacterGenderUiModel
 import com.vadymmy.ricktionary.ui.characters.list.model.CharacterItemUiModel
 import com.vadymmy.ricktionary.ui.characters.common.model.CharacterStatusUiModel
+import com.vadymmy.ricktionary.ui.characters.details.model.CharacterUiModel
 
-object CharacterItemsPreview {
+object CharacterPreview {
+    val character = CharacterUiModel(
+        id = 0,
+        name = "Rick Sanchez",
+        type = "",
+        species = "Human",
+        imageUrl = "https://rickandmortyapi.com/api/character/avatar/1.jpeg",
+        origin = "Earth",
+        location = "Citadel of Ricks",
+        episodesNumber = 51,
+        status = CharacterStatusUiModel.Alive,
+        gender = CharacterGenderUiModel.Male,
+    )
+
     val characterItems = listOf(
         CharacterItemUiModel(
             id = 0,

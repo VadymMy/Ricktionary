@@ -3,7 +3,7 @@ package com.vadymmy.ricktionary.ui.characters.list
 import com.vadymmy.ricktionary.domain.characters.usecase.FetchCharactersUseCase
 import com.vadymmy.ricktionary.domain.characters.usecase.GetCharactersFlowUseCase
 import com.vadymmy.ricktionary.ui.base.BaseViewModel
-import com.vadymmy.ricktionary.ui.characters.list.mapper.toUiModels
+import com.vadymmy.ricktionary.ui.characters.common.mapper.toItemUiModels
 import com.vadymmy.ricktionary.ui.navigation.AppNavigator
 import com.vadymmy.ricktionary.ui.navigation.model.AppNavRoute
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -39,7 +39,7 @@ class CharactersViewModel @Inject constructor(
         launchViewModelScope {
             getCharactersFlowUseCase().collectLatest { characters ->
                 updateUiState {
-                    it.copy(characters = characters.toUiModels())
+                    it.copy(characters = characters.toItemUiModels())
                 }
             }
         }

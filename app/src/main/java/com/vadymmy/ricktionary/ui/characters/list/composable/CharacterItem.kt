@@ -15,15 +15,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
-import coil.compose.AsyncImage
 import com.vadymmy.ricktionary.R
 import com.vadymmy.ricktionary.ui.characters.common.composable.CharacterGenderPill
+import com.vadymmy.ricktionary.ui.characters.common.composable.CharacterImage
 import com.vadymmy.ricktionary.ui.characters.common.composable.CharacterStatusPill
 import com.vadymmy.ricktionary.ui.characters.list.model.CharacterItemUiModel
-import com.vadymmy.ricktionary.ui.characters.list.preview.CharacterItemsPreview
+import com.vadymmy.ricktionary.ui.characters.common.preview.CharacterPreview
 import com.vadymmy.ricktionary.ui.theme.AppColors
 import com.vadymmy.ricktionary.ui.theme.Typography
 import com.vadymmy.ricktionary.ui.theme.cardContainerShapeDefault
@@ -48,16 +47,13 @@ fun CharacterItem(
             .padding(margin1_5X)
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
-            AsyncImage(
+            CharacterImage(
                 modifier = Modifier
-                    .size(characterItemImageSize)
                     .background(color = AppColors.Background, shape = cardContainerShapeDefault)
-                    .clip(cardContainerShapeDefault),
-                model = item.imageUrl,
-                contentDescription = item.name,
-                contentScale = ContentScale.Inside,
-                placeholder = painterResource(id = R.drawable.ic_character_placeholder),
-                error = painterResource(id = R.drawable.ic_character_placeholder)
+                    .clip(cardContainerShapeDefault)
+                    .size(characterItemImageSize),
+                imageUrl = item.imageUrl,
+                contentDescription = item.name
             )
 
             Column(
@@ -97,7 +93,7 @@ private fun LocationText(location: String) {
 @Preview
 private fun CharacterItemPreview() {
     Column(verticalArrangement = Arrangement.spacedBy(margin1X)) {
-        CharacterItemsPreview.characterItems.forEach {
+        CharacterPreview.characterItems.forEach {
             CharacterItem(item = it)
         }
     }
