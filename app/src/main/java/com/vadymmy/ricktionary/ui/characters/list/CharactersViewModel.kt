@@ -21,7 +21,7 @@ class CharactersViewModel @Inject constructor(
         observeCharactersFlow()
     }
 
-    override fun onResume() {
+    override fun onCreate() {
         fetchCharacters()
     }
 

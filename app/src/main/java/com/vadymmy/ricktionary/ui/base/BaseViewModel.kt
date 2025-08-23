@@ -18,6 +18,7 @@ abstract class BaseViewModel<STATE, INTENT, EFFECT>(
     val uiEffectFlow: SharedFlow<EFFECT> = MutableSharedFlow()
     protected val uiState get() = uiStateFlow.value
 
+    open fun onCreate() = Unit
     open fun onResume() = Unit
 
     fun onUserIntent(intent: INTENT) = reduceIntent(intent)
