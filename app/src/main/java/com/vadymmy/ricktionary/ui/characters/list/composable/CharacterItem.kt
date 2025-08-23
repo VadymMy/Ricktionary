@@ -20,6 +20,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import coil.compose.AsyncImage
 import com.vadymmy.ricktionary.R
+import com.vadymmy.ricktionary.ui.characters.common.composable.CharacterGenderPill
+import com.vadymmy.ricktionary.ui.characters.common.composable.CharacterStatusPill
 import com.vadymmy.ricktionary.ui.characters.list.model.CharacterItemUiModel
 import com.vadymmy.ricktionary.ui.characters.list.preview.CharacterItemsPreview
 import com.vadymmy.ricktionary.ui.theme.AppColors
@@ -63,8 +65,13 @@ fun CharacterItem(
                 verticalArrangement = Arrangement.spacedBy(margin1X)
             ) {
                 Text(text = item.name, style = Typography.bodyLarge, color = AppColors.TextPrimary)
+
                 LocationText(location = item.location)
-                CharacterStatusPill(statusUiModel = item.status)
+
+                Row(horizontalArrangement = Arrangement.spacedBy(margin1X)) {
+                    CharacterStatusPill(status = item.status)
+                    CharacterGenderPill(gender = item.gender)
+                }
             }
         }
     }

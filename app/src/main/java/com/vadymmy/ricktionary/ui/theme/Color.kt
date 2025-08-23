@@ -15,6 +15,11 @@ object AppColors {
     val YellowSecondary = Color(0xFFFFEB3B)
     val YellowSecondaryDark = Color(0xFFFBC02D)
 
+    // Genders
+    val Blue = Color(0xFF2196F3)
+    val Pink = Color(0xFFE91E63)
+    val Purple = Color(0xFF9C27B0)
+
     // Backgrounds & Surfaces
     val Background = Color(0xFFF9FAFB)
     val ItemBackground = White

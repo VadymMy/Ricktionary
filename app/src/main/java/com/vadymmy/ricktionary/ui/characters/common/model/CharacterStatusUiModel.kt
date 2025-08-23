@@ -1,4 +1,4 @@
-package com.vadymmy.ricktionary.ui.characters.list.model
+package com.vadymmy.ricktionary.ui.characters.common.model
 
 import androidx.annotation.StringRes
 import androidx.compose.ui.graphics.Color
@@ -12,5 +12,5 @@ enum class CharacterStatusUiModel(
 ) {
     Alive(stringRes = R.string.character_status_alive, color = AppColors.GreenPrimary),
     Dead(stringRes = R.string.character_status_dead, color = AppColors.Red),
-    Unknown(stringRes = R.string.character_status_unknown, color = AppColors.YellowSecondaryDark)
+    Unknown(stringRes = R.string.unknown, color = AppColors.YellowSecondaryDark)
 }

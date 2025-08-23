@@ -24,6 +24,7 @@ val textSizeLarge = 24.sp
 val emptyStateImageHeight = 180.dp
 val errorStateImageHeight = 100.dp
 val characterItemImageSize = 100.dp
+val genderPillImageSize = 10.dp
 val topBarImageSize = 24.dp
 
 // Containers
