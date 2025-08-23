@@ -23,9 +23,7 @@ import com.vadymmy.ricktionary.ui.theme.AppColors
 import com.vadymmy.ricktionary.ui.theme.margin2X
 
 @Composable
-fun CharacterDetailsScreen(
-    characterDetailsViewModel: CharacterDetailsViewModel = hiltViewModel()
-) {
+fun CharacterDetailsScreen(characterDetailsViewModel: CharacterDetailsViewModel = hiltViewModel()) {
     val uiState by characterDetailsViewModel.uiStateFlow.collectAsState()
 
     CharacterDetailsScreenContent(
