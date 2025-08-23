@@ -27,8 +27,8 @@ import com.vadymmy.ricktionary.ui.theme.margin2X
 fun CharactersScreen(charactersViewModel: CharactersViewModel = hiltViewModel()) {
     val uiState by charactersViewModel.uiStateFlow.collectAsState()
 
-    LifecycleEffect(onResume = {
-        charactersViewModel.onResume()
+    LifecycleEffect(onCreate = {
+        charactersViewModel.onCreate()
     })
 
     CharactersScreenContent(
@@ -87,7 +87,7 @@ private fun CharactersScreenScaffold(
             topBar()
 
             when {
-                uiState.showLoadingError -> {
+                uiState.showLoadingError && uiState.characters.isEmpty() -> {
                     errorState()
                 }
 

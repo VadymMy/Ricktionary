@@ -10,6 +10,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.Preview
+import com.vadymmy.ricktionary.ui.core.animation.shimmerLoading
+import com.vadymmy.ricktionary.ui.core.modifier.modifyIf
 import com.vadymmy.ricktionary.ui.theme.AppColors
 import com.vadymmy.ricktionary.ui.theme.cardContainerShapeDefault
 import com.vadymmy.ricktionary.ui.theme.characterItemImageSize
@@ -18,6 +20,7 @@ import com.vadymmy.ricktionary.ui.theme.characterItemImageSize
 fun ItemCard(
     modifier: Modifier = Modifier,
     paddingValues: PaddingValues = PaddingValues(),
+    showShimmerLoading: Boolean = false,
     content: @Composable () -> Unit = {}
 ) {
     Box(
@@ -26,6 +29,9 @@ fun ItemCard(
             .background(color = AppColors.ItemBackground, shape = cardContainerShapeDefault)
             .clip(shape = cardContainerShapeDefault)
             .padding(paddingValues)
+            .modifyIf(showShimmerLoading) {
+                shimmerLoading()
+            }
     ) {
         content()
     }
