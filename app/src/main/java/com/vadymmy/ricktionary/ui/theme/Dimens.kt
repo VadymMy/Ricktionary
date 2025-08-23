@@ -8,6 +8,7 @@ val marginHalf = 4.dp
 val margin1X = 8.dp
 val margin1_5X = 12.dp
 val margin2X = 16.dp
+val margin2_5X = 16.dp
 val margin3X = 24.dp
 val margin4X = 32.dp
 
@@ -24,9 +25,9 @@ val textSizeLarge = 24.sp
 val emptyStateImageHeight = 180.dp
 val errorStateImageHeight = 100.dp
 val characterItemImageSize = 120.dp
-val characterDetailsImageHeight = 300.dp
 val genderPillImageSize = 10.dp
 val topBarImageSize = 24.dp
+val characterAttributeImageSize = 16.dp
 
 // Containers
 val pillContainerHeight = 24.dp

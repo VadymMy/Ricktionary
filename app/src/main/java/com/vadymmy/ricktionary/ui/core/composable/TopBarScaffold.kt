@@ -6,7 +6,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -20,7 +19,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.vadymmy.ricktionary.R
 import com.vadymmy.ricktionary.ui.theme.AppColors
 import com.vadymmy.ricktionary.ui.theme.Typography
-import com.vadymmy.ricktionary.ui.theme.margin1X
+import com.vadymmy.ricktionary.ui.theme.marginHalf
 import com.vadymmy.ricktionary.ui.theme.topBarHeight
 import com.vadymmy.ricktionary.ui.theme.topBarImageSize
 
@@ -35,7 +34,7 @@ fun TopBarScaffold(
             .fillMaxWidth()
             .height(topBarHeight),
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(margin1X)
+        horizontalArrangement = Arrangement.spacedBy(marginHalf)
     ) {
         leadingContent()
 

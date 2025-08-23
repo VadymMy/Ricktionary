@@ -16,5 +16,5 @@ enum class CharacterGenderUiModel(
     Male(stringRes = R.string.character_gender_male, iconRes = R.drawable.ic_male, color = AppColors.Blue),
     Female(stringRes = R.string.character_gender_female, iconRes = R.drawable.ic_female, color = AppColors.Pink),
     Genderless(stringRes = R.string.character_gender_genderless, iconRes = R.drawable.ic_genderless, color = AppColors.Purple),
-    Unknown(stringRes = R.string.unknown, iconRes = R.drawable.ic_question, color = AppColors.YellowSecondaryDark)
+    Unknown(stringRes = R.string.unknown, iconRes = R.drawable.ic_question, color = AppColors.YellowDark)
 }

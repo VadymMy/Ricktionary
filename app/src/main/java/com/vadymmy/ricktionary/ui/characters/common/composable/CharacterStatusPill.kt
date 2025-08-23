@@ -15,7 +15,6 @@ import com.vadymmy.ricktionary.ui.core.composable.InformationPill
 import com.vadymmy.ricktionary.ui.theme.margin1X
 import com.vadymmy.ricktionary.ui.theme.statusPillCircleSize
 
-
 @Composable
 fun CharacterStatusPill(status: CharacterStatusUiModel) {
     InformationPill(
@@ -25,10 +24,7 @@ fun CharacterStatusPill(status: CharacterStatusUiModel) {
             Box(
                 modifier = Modifier
                     .size(statusPillCircleSize)
-                    .background(
-                        color = status.color,
-                        shape = CircleShape
-                    )
+                    .background(color = status.color, shape = CircleShape)
             )
         }
     )

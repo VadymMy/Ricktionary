@@ -12,5 +12,5 @@ enum class CharacterStatusUiModel(
 ) {
     Alive(stringRes = R.string.character_status_alive, color = AppColors.GreenPrimary),
     Dead(stringRes = R.string.character_status_dead, color = AppColors.Red),
-    Unknown(stringRes = R.string.unknown, color = AppColors.YellowSecondaryDark)
+    Unknown(stringRes = R.string.unknown, color = AppColors.YellowDark)
 }

@@ -4,6 +4,8 @@ import androidx.lifecycle.SavedStateHandle
 import androidx.navigation.toRoute
 import com.vadymmy.ricktionary.domain.characters.usecase.GetCharacterUseCase
 import com.vadymmy.ricktionary.ui.base.BaseViewModel
+import com.vadymmy.ricktionary.ui.characters.common.mapper.toUiModel
+import com.vadymmy.ricktionary.ui.navigation.AppNavigator
 import com.vadymmy.ricktionary.ui.navigation.model.AppNavRoute
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
@@ -11,7 +13,8 @@ import javax.inject.Inject
 @HiltViewModel
 class CharacterDetailsViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
-    private val getCharacterUseCase: GetCharacterUseCase
+    private val getCharacterUseCase: GetCharacterUseCase,
+    private val appNavigator: AppNavigator
 ) : BaseViewModel<CharacterDetailsUiState, CharacterDetailsIntent, Nothing>(CharacterDetailsUiState()) {
 
     init {
@@ -20,7 +23,11 @@ class CharacterDetailsViewModel @Inject constructor(
     }
 
     override fun reduceIntent(intent: CharacterDetailsIntent) {
-        // TODO reduce details intent
+        launchViewModelScope {
+            when (intent) {
+                CharacterDetailsIntent.BackButtonClicked -> appNavigator.back()
+            }
+        }
     }
 
     private fun loadCharacter(characterId: Int) {
@@ -34,7 +41,7 @@ class CharacterDetailsViewModel @Inject constructor(
             updateUiState {
                 it.copy(
                     isLoading = false,
-                    character = characterResult.getOrNull(),
+                    character = characterResult.getOrNull()?.toUiModel(),
                     showLoadingError = characterResult.isFailure
                 )
             }

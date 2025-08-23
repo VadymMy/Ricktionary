@@ -3,9 +3,16 @@
 
     <!-- Common -->
     <string name="unknown">Unknown</string>
+    <string name="back">Back</string>
 
     <!-- Characters Screen -->
     <string name="characters_screen_title">Characters</string>
+
+    <!-- Character Details Screen -->
+    <string name="character_details_screen_title">Details</string>
+    <string name="character_details_origin_title">Origin</string>
+    <string name="character_details_location_title">Location</string>
+    <string name="character_details_episodes_number">Episodes: %d</string>
 
     <!-- Characters Empty State -->
     <string name="empty_state_title">No characters found</string>

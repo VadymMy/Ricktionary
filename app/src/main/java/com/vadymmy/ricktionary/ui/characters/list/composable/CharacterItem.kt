@@ -8,15 +8,16 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import com.vadymmy.ricktionary.R
+import com.vadymmy.ricktionary.ui.characters.common.composable.CharacterAttributeRow
 import com.vadymmy.ricktionary.ui.characters.common.composable.CharacterGenderPill
 import com.vadymmy.ricktionary.ui.characters.common.composable.CharacterImage
 import com.vadymmy.ricktionary.ui.characters.common.composable.CharacterStatusPill
@@ -27,7 +28,6 @@ import com.vadymmy.ricktionary.ui.theme.AppColors
 import com.vadymmy.ricktionary.ui.theme.Typography
 import com.vadymmy.ricktionary.ui.theme.characterItemImageSize
 import com.vadymmy.ricktionary.ui.theme.margin1X
-import com.vadymmy.ricktionary.ui.theme.marginHalf
 import com.vadymmy.ricktionary.ui.theme.shapeCharacterCardImage
 
 @Composable
@@ -56,7 +56,11 @@ fun CharacterItem(
             ) {
                 Text(text = item.name, style = Typography.bodyLarge, color = AppColors.TextPrimary)
 
-                LocationText(location = item.location)
+                CharacterAttributeRow(
+                    text = item.location,
+                    painter = painterResource(id = R.drawable.ic_location),
+                    contentDescription = stringResource(id = R.string.character_details_location_title)
+                )
 
                 Row(
                     modifier = Modifier.padding(top = margin1X),
@@ -67,22 +71,6 @@ fun CharacterItem(
                 }
             }
         }
-    }
-}
-
-@Composable
-private fun LocationText(location: String) {
-    Row(
-        horizontalArrangement = Arrangement.spacedBy(marginHalf),
-        verticalAlignment = Alignment.CenterVertically
-    ) {
-        Icon(
-            painter = painterResource(id = R.drawable.ic_location),
-            tint = AppColors.TextSecondary,
-            contentDescription = null
-        )
-
-        Text(text = location, style = Typography.bodySmall, color = AppColors.TextSecondary)
     }
 }
 

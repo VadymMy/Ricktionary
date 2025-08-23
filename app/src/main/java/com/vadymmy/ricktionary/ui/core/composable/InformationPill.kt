@@ -60,7 +60,7 @@ fun InformationPill(
 @Preview
 private fun InformationPillPreview() {
     InformationPill(
-        color = AppColors.YellowSecondaryDark,
+        color = AppColors.YellowDark,
         text = stringResource(id = R.string.unknown)
     )
 }
