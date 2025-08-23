@@ -1,9 +1,6 @@
-package com.vadymmy.ricktionary.ui.characters
+package com.vadymmy.ricktionary.ui.characters.list
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
@@ -16,15 +13,15 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.vadymmy.ricktionary.R
-import com.vadymmy.ricktionary.ui.characters.composable.CharactersList
-import com.vadymmy.ricktionary.ui.characters.preview.CharacterItemsPreview
+import com.vadymmy.ricktionary.ui.characters.common.composable.CharacterErrorState
+import com.vadymmy.ricktionary.ui.characters.list.composable.CharactersList
+import com.vadymmy.ricktionary.ui.characters.common.preview.CharacterPreview
 import com.vadymmy.ricktionary.ui.core.LifecycleEffect
 import com.vadymmy.ricktionary.ui.core.composable.FeedbackState
 import com.vadymmy.ricktionary.ui.core.composable.TopBarScaffold
 import com.vadymmy.ricktionary.ui.theme.AppColors
 import com.vadymmy.ricktionary.ui.theme.emptyStateImageHeight
-import com.vadymmy.ricktionary.ui.theme.errorStateImageHeight
-import com.vadymmy.ricktionary.ui.theme.margin1X
+import com.vadymmy.ricktionary.ui.theme.margin2X
 
 @Composable
 fun CharactersScreen(charactersViewModel: CharactersViewModel = hiltViewModel()) {
@@ -36,7 +33,7 @@ fun CharactersScreen(charactersViewModel: CharactersViewModel = hiltViewModel())
 
     CharactersScreenContent(
         uiState = uiState,
-        onUserIntent = { charactersViewModel.onUserIntent(intent = it) }
+        onUserIntent = charactersViewModel::onUserIntent
     )
 }
 
@@ -53,7 +50,10 @@ private fun CharactersScreenContent(
         content = {
             CharactersList(
                 isLoading = uiState.isLoading,
-                characters = uiState.characters
+                characters = uiState.characters,
+                onCharacterClicked = {
+                    onUserIntent(CharactersIntent.CharacterItemClicked(it))
+                }
             )
         },
         emptyState = {
@@ -65,12 +65,7 @@ private fun CharactersScreenContent(
             )
         },
         errorState = {
-            FeedbackState(
-                imageModifier = Modifier.height(errorStateImageHeight),
-                title = stringResource(id = R.string.error_state_title),
-                subtitle = stringResource(id = R.string.error_state_subtitle),
-                painter = painterResource(id = R.drawable.ic_sad_morty)
-            )
+            CharacterErrorState()
         }
     )
 }
@@ -83,31 +78,25 @@ private fun CharactersScreenScaffold(
     emptyState: @Composable () -> Unit = {},
     errorState: @Composable () -> Unit = {}
 ) {
-    Scaffold { paddingValues ->
+    Scaffold(containerColor = AppColors.Background) { paddingValues ->
         Column(
             modifier = Modifier
-                .background(color = AppColors.Background)
                 .padding(paddingValues)
+                .padding(horizontal = margin2X)
         ) {
             topBar()
 
-            Box(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(margin1X)
-            ) {
-                when {
-                    uiState.showLoadingError -> {
-                        errorState()
-                    }
+            when {
+                uiState.showLoadingError -> {
+                    errorState()
+                }
 
-                    uiState.isLoading || uiState.characters.isNotEmpty() -> {
-                        content()
-                    }
+                uiState.isLoading || uiState.characters.isNotEmpty() -> {
+                    content()
+                }
 
-                    else -> {
-                        emptyState()
-                    }
+                else -> {
+                    emptyState()
                 }
             }
         }
@@ -117,7 +106,13 @@ private fun CharactersScreenScaffold(
 @Composable
 @Preview
 private fun EmptyCharactersScreenPreview() {
-    CharactersScreenContent(uiState = CharactersUiState())
+    CharactersScreenContent(uiState = CharactersUiState(isLoading = false))
+}
+
+@Composable
+@Preview
+private fun ErrorCharactersScreenPreview() {
+    CharactersScreenContent(uiState = CharactersUiState(isLoading = false, showLoadingError = true))
 }
 
 @Composable
@@ -131,7 +126,8 @@ private fun LoadingCharactersScreenPreview() {
 private fun CharactersScreenPreview() {
     CharactersScreenContent(
         uiState = CharactersUiState(
-            characters = CharacterItemsPreview.characterItems
+            isLoading = false,
+            characters = CharacterPreview.characterItems
         )
     )
 }

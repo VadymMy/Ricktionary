@@ -1,34 +1,43 @@
 package com.vadymmy.ricktionary.data.characters.remote.mapper
 
 import com.vadymmy.ricktionary.data.characters.remote.model.CharacterDto
+import com.vadymmy.ricktionary.data.characters.remote.model.CharacterGenderDto
 import com.vadymmy.ricktionary.data.characters.remote.model.CharacterLocationDto
 import com.vadymmy.ricktionary.data.characters.remote.model.CharacterOriginDto
 import com.vadymmy.ricktionary.data.characters.remote.model.CharacterStatusDto
 import com.vadymmy.ricktionary.domain.characters.model.Character
+import com.vadymmy.ricktionary.domain.characters.model.CharacterGender
 import com.vadymmy.ricktionary.domain.characters.model.CharacterLocation
 import com.vadymmy.ricktionary.domain.characters.model.CharacterOrigin
 import com.vadymmy.ricktionary.domain.characters.model.CharacterStatus
 
-fun List<CharacterDto>.toDomainModels(): List<Character> = this.map {
-    Character(
-        id = it.id,
-        name = it.name,
-        url = it.url,
-        status = it.status.toDomainModel(),
-        species = it.species,
-        type = it.type,
-        gender = it.gender,
-        origin = it.origin.toDomainModel(),
-        location = it.location.toDomainModel(),
-        imageUrl = it.imageUrl,
-        episodes = it.episodes
-    )
-}
+fun List<CharacterDto>.toDomainModels(): List<Character> = this.map { it.toDomainModel() }
+
+fun CharacterDto.toDomainModel(): Character = Character(
+    id = this.id,
+    name = this.name,
+    url = this.url,
+    status = this.status.toDomainModel(),
+    species = this.species,
+    type = this.type,
+    gender = this.gender.toDomainModel(),
+    origin = this.origin.toDomainModel(),
+    location = this.location.toDomainModel(),
+    imageUrl = this.imageUrl,
+    episodes = this.episodes
+)
 
 private fun CharacterStatusDto.toDomainModel(): CharacterStatus = when (this) {
     CharacterStatusDto.Alive -> CharacterStatus.Alive
     CharacterStatusDto.Dead -> CharacterStatus.Dead
     CharacterStatusDto.Unknown -> CharacterStatus.Unknown
+}
+
+private fun CharacterGenderDto.toDomainModel(): CharacterGender = when (this) {
+    CharacterGenderDto.Male -> CharacterGender.Male
+    CharacterGenderDto.Female -> CharacterGender.Female
+    CharacterGenderDto.Genderless -> CharacterGender.Genderless
+    CharacterGenderDto.Unknown -> CharacterGender.Unknown
 }
 
 private fun CharacterOriginDto.toDomainModel(): CharacterOrigin = CharacterOrigin(name = this.name, url = this.url)

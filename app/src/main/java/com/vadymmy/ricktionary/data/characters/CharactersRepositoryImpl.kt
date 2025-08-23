@@ -1,5 +1,6 @@
 package com.vadymmy.ricktionary.data.characters
 
+import com.vadymmy.ricktionary.data.characters.remote.mapper.toDomainModel
 import com.vadymmy.ricktionary.data.characters.remote.mapper.toDomainModels
 import com.vadymmy.ricktionary.data.characters.remote.source.CharactersRemoteDataSource
 import com.vadymmy.ricktionary.domain.characters.CharactersRepository
@@ -17,5 +18,10 @@ class CharactersRepositoryImpl @Inject constructor(
         val charactersList = response.characters.toDomainModels()
 
         charactersFlow.emit(charactersList)
+    }
+
+    override suspend fun getCharacter(id: Int): Character {
+        val characterFromCache = charactersFlow.value.find { it.id == id }
+        return characterFromCache ?: charactersRemoteDataSource.getCharacter(id = id).toDomainModel()
     }
 }

@@ -6,4 +6,7 @@ import kotlinx.serialization.Serializable
 sealed interface AppNavRoute {
     @Serializable
     data object Characters : AppNavRoute
+
+    @Serializable
+    data class CharacterDetails(val id: Int) : AppNavRoute
 }
