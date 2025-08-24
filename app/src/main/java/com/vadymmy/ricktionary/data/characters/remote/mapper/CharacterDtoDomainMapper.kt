@@ -11,8 +11,6 @@ import com.vadymmy.ricktionary.domain.characters.model.CharacterLocation
 import com.vadymmy.ricktionary.domain.characters.model.CharacterOrigin
 import com.vadymmy.ricktionary.domain.characters.model.CharacterStatus
 
-fun List<CharacterDto>.toDomainModels(): List<Character> = this.map { it.toDomainModel() }
-
 fun CharacterDto.toDomainModel(): Character = Character(
     id = this.id,
     name = this.name,
@@ -27,13 +25,13 @@ fun CharacterDto.toDomainModel(): Character = Character(
     episodes = this.episodes
 )
 
-private fun CharacterStatusDto.toDomainModel(): CharacterStatus = when (this) {
+fun CharacterStatusDto.toDomainModel(): CharacterStatus = when (this) {
     CharacterStatusDto.Alive -> CharacterStatus.Alive
     CharacterStatusDto.Dead -> CharacterStatus.Dead
     CharacterStatusDto.Unknown -> CharacterStatus.Unknown
 }
 
-private fun CharacterGenderDto.toDomainModel(): CharacterGender = when (this) {
+fun CharacterGenderDto.toDomainModel(): CharacterGender = when (this) {
     CharacterGenderDto.Male -> CharacterGender.Male
     CharacterGenderDto.Female -> CharacterGender.Female
     CharacterGenderDto.Genderless -> CharacterGender.Genderless

@@ -80,4 +80,9 @@ dependencies {
 
     // UI
     implementation(libs.coil.compose)
+
+    // DB
+    implementation(libs.room.runtime)
+    implementation(libs.room.ktx)
+    ksp(libs.room.compiler)
 }

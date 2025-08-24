@@ -57,7 +57,7 @@ fun CharacterItem(
                 Text(text = item.name, style = Typography.bodyLarge, color = AppColors.TextPrimary)
 
                 CharacterAttributeRow(
-                    text = item.location,
+                    text = item.location.ifBlank { stringResource(id = R.string.unknown) },
                     painter = painterResource(id = R.drawable.ic_location),
                     contentDescription = stringResource(id = R.string.character_details_location_title)
                 )

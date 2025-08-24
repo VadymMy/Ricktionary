@@ -108,9 +108,6 @@ private fun CharacterAttributeInformation(
     attributeValue: String,
     painter: Painter
 ) {
-    if (attributeValue.isBlank()) return
-    val unknownText = stringResource(id = R.string.unknown)
-
     Spacer(modifier = Modifier.padding(marginHalf))
 
     CharacterAttributeRow(
@@ -121,7 +118,7 @@ private fun CharacterAttributeInformation(
 
     Text(
         modifier = Modifier.padding(start = marginHalf),
-        text = if (attributeValue.equals(unknownText, ignoreCase = true)) unknownText else attributeValue,
+        text = attributeValue.ifBlank { stringResource(id = R.string.unknown) },
         style = Typography.bodyLarge
     )
 }
