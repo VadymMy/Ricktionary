@@ -80,6 +80,9 @@ dependencies {
 
     // UI
     implementation(libs.coil.compose)
+    implementation(libs.paging.runtime)
+    implementation(libs.paging.compose)
+    testImplementation(libs.paging.common)
 
     // DB
     implementation(libs.room.runtime)
