@@ -1,5 +1,7 @@
 package com.vadymmy.ricktionary.data.characters.local.mapper
 
+import androidx.paging.PagingData
+import androidx.paging.map
 import com.vadymmy.ricktionary.data.characters.local.model.CharacterEpisodeEntity
 import com.vadymmy.ricktionary.data.characters.local.model.CharacterLocationEntity
 import com.vadymmy.ricktionary.data.characters.local.model.CharacterOriginEntity
@@ -10,7 +12,7 @@ import com.vadymmy.ricktionary.domain.characters.model.CharacterLocation
 import com.vadymmy.ricktionary.domain.characters.model.CharacterOrigin
 import com.vadymmy.ricktionary.domain.characters.model.CharacterStatus
 
-fun List<CharacterWithRelationsEntity>.toDomainModels() : List<Character> = this.map {
+fun PagingData<CharacterWithRelationsEntity>.toDomainModels() : PagingData<Character> = this.map {
     it.toDomainModel()
 }
 

@@ -1,5 +1,6 @@
 package com.vadymmy.ricktionary.data.characters.local.dao
 
+import androidx.paging.PagingSource
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -11,13 +12,12 @@ import com.vadymmy.ricktionary.data.characters.local.model.CharacterInEpisodeEnt
 import com.vadymmy.ricktionary.data.characters.local.model.CharacterLocationEntity
 import com.vadymmy.ricktionary.data.characters.local.model.CharacterOriginEntity
 import com.vadymmy.ricktionary.data.characters.local.model.CharacterWithRelationsEntity
-import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface CharactersDao {
     @Transaction
     @Query("SELECT * FROM ${CharacterEntity.TABLE_NAME}")
-    fun getAllCharactersFlow(): Flow<List<CharacterWithRelationsEntity>>
+    fun getCharactersPagingSource(): PagingSource<Int, CharacterWithRelationsEntity>
 
     @Transaction
     @Query("SELECT COUNT(*) FROM ${CharacterEntity.TABLE_NAME}")
@@ -56,4 +56,7 @@ interface CharactersDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insertCharacterInEpisodes(characterInEpisodes: List<CharacterInEpisodeEntity>)
+
+    @Query("DELETE FROM ${CharacterEntity.TABLE_NAME}")
+    suspend fun clearCharacters()
 }

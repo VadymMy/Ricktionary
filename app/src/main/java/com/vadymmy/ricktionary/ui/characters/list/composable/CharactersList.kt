@@ -2,13 +2,11 @@ package com.vadymmy.ricktionary.ui.characters.list.composable
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.paging.compose.LazyPagingItems
 import com.vadymmy.ricktionary.ui.characters.list.model.CharacterItemUiModel
 import com.vadymmy.ricktionary.ui.characters.common.preview.CharacterPreview
-import com.vadymmy.ricktionary.ui.theme.margin1X
-import com.vadymmy.ricktionary.ui.theme.margin1_5X
 import com.vadymmy.ricktionary.ui.theme.margin2X
 
 private const val LOADING_ITEMS_SIZE = 10
@@ -16,7 +14,7 @@ private const val LOADING_ITEMS_SIZE = 10
 @Composable
 fun CharactersList(
     isLoading: Boolean,
-    characters: List<CharacterItemUiModel>,
+    characters: LazyPagingItems<CharacterItemUiModel>,
     onCharacterClicked: (CharacterItemUiModel) -> Unit = {}
 ) {
     LazyColumn(verticalArrangement = Arrangement.spacedBy(margin2X)) {
@@ -25,7 +23,9 @@ fun CharactersList(
                 CharacterLoadingItem()
             }
         } else {
-            items(characters, key = { it.id }) { character ->
+            items(characters.itemCount) { index ->
+                val character = characters[index] ?: return@items
+
                 CharacterItem(
                     item = character,
                     onClick = { onCharacterClicked(character) }
@@ -40,7 +40,7 @@ fun CharactersList(
 private fun CharactersListLoadingPreview() {
     CharactersList(
         isLoading = true,
-        characters = emptyList()
+        characters = CharacterPreview.getLazyCharacterItems()
     )
 }
 
@@ -49,6 +49,6 @@ private fun CharactersListLoadingPreview() {
 private fun CharactersListPreview() {
     CharactersList(
         isLoading = false,
-        characters = CharacterPreview.characterItems
+        characters = CharacterPreview.getLazyCharacterItems()
     )
 }

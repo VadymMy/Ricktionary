@@ -11,7 +11,7 @@ import javax.inject.Inject
 class CharactersLocalDataSourceImpl @Inject constructor(
     private val charactersDao: CharactersDao
 ) : CharactersLocalDataSource {
-    override val charactersFlow = charactersDao.getAllCharactersFlow()
+    override fun getCharactersPagingSource() = charactersDao.getCharactersPagingSource()
 
     override suspend fun areCharactersSaved() = charactersDao.getSavedCharactersNumber() > 0
 
@@ -35,4 +35,6 @@ class CharactersLocalDataSourceImpl @Inject constructor(
             characterInEpisodes = characterInEpisodes
         )
     }
+
+    override suspend fun clearCharacters() = charactersDao.clearCharacters()
 }

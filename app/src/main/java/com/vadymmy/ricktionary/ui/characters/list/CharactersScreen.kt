@@ -12,10 +12,14 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.paging.LoadState
+import androidx.paging.compose.LazyPagingItems
+import androidx.paging.compose.collectAsLazyPagingItems
 import com.vadymmy.ricktionary.R
 import com.vadymmy.ricktionary.ui.characters.common.composable.CharacterErrorState
 import com.vadymmy.ricktionary.ui.characters.list.composable.CharactersList
 import com.vadymmy.ricktionary.ui.characters.common.preview.CharacterPreview
+import com.vadymmy.ricktionary.ui.characters.list.model.CharacterItemUiModel
 import com.vadymmy.ricktionary.ui.core.LifecycleEffect
 import com.vadymmy.ricktionary.ui.core.composable.FeedbackState
 import com.vadymmy.ricktionary.ui.core.composable.TopBarScaffold
@@ -26,6 +30,7 @@ import com.vadymmy.ricktionary.ui.theme.margin2X
 @Composable
 fun CharactersScreen(charactersViewModel: CharactersViewModel = hiltViewModel()) {
     val uiState by charactersViewModel.uiStateFlow.collectAsState()
+    val characters = charactersViewModel.charactersFlow.collectAsLazyPagingItems()
 
     LifecycleEffect(onCreate = {
         charactersViewModel.onCreate()
@@ -33,6 +38,7 @@ fun CharactersScreen(charactersViewModel: CharactersViewModel = hiltViewModel())
 
     CharactersScreenContent(
         uiState = uiState,
+        characters = characters,
         onUserIntent = charactersViewModel::onUserIntent
     )
 }
@@ -40,17 +46,19 @@ fun CharactersScreen(charactersViewModel: CharactersViewModel = hiltViewModel())
 @Composable
 private fun CharactersScreenContent(
     uiState: CharactersUiState,
+    characters: LazyPagingItems<CharacterItemUiModel>,
     onUserIntent: (CharactersIntent) -> Unit = {}
 ) {
     CharactersScreenScaffold(
         uiState = uiState,
+        characters = characters,
         topBar = {
             TopBarScaffold(title = stringResource(id = R.string.characters_screen_title))
         },
-        content = {
+        content = { isLoading ->
             CharactersList(
-                isLoading = uiState.isLoading,
-                characters = uiState.characters,
+                isLoading = isLoading,
+                characters = characters,
                 onCharacterClicked = {
                     onUserIntent(CharactersIntent.CharacterItemClicked(it))
                 }
@@ -73,8 +81,9 @@ private fun CharactersScreenContent(
 @Composable
 private fun CharactersScreenScaffold(
     uiState: CharactersUiState,
+    characters: LazyPagingItems<CharacterItemUiModel>,
     topBar: @Composable () -> Unit = {},
-    content: @Composable () -> Unit = {},
+    content: @Composable (isLoading: Boolean) -> Unit = {},
     emptyState: @Composable () -> Unit = {},
     errorState: @Composable () -> Unit = {}
 ) {
@@ -86,17 +95,17 @@ private fun CharactersScreenScaffold(
         ) {
             topBar()
 
-            when {
-                uiState.showLoadingError && uiState.characters.isEmpty() -> {
-                    errorState()
-                }
+            when (characters.loadState.refresh) {
+                is LoadState.Error -> errorState()
 
-                uiState.isLoading || uiState.characters.isNotEmpty() -> {
-                    content()
-                }
+                LoadState.Loading -> content(true)
 
-                else -> {
-                    emptyState()
+                is LoadState.NotLoading -> {
+                    if (characters.itemCount > 0) {
+                        content(false)
+                    } else {
+                        emptyState()
+                    }
                 }
             }
         }
@@ -106,28 +115,36 @@ private fun CharactersScreenScaffold(
 @Composable
 @Preview
 private fun EmptyCharactersScreenPreview() {
-    CharactersScreenContent(uiState = CharactersUiState(isLoading = false))
+    CharactersScreenContent(
+        uiState = CharactersUiState(),
+        characters = CharacterPreview.getLazyCharacterItems(),
+        onUserIntent = {}
+    )
 }
 
 @Composable
 @Preview
 private fun ErrorCharactersScreenPreview() {
-    CharactersScreenContent(uiState = CharactersUiState(isLoading = false, showLoadingError = true))
+    CharactersScreenContent(
+        uiState = CharactersUiState(),
+        characters = CharacterPreview.getLazyCharacterItems()
+    )
 }
 
 @Composable
 @Preview
 private fun LoadingCharactersScreenPreview() {
-    CharactersScreenContent(uiState = CharactersUiState(isLoading = true))
+    CharactersScreenContent(
+        uiState = CharactersUiState(),
+        characters = CharacterPreview.getLazyCharacterItems()
+    )
 }
 
 @Composable
 @Preview
 private fun CharactersScreenPreview() {
     CharactersScreenContent(
-        uiState = CharactersUiState(
-            isLoading = false,
-            characters = CharacterPreview.characterItems
-        )
+        uiState = CharactersUiState(),
+        characters = CharacterPreview.getLazyCharacterItems()
     )
 }
