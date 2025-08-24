@@ -7,6 +7,7 @@ import androidx.paging.PagingConfig
 import androidx.room.Room
 import com.vadymmy.ricktionary.data.characters.CharactersRepositoryImpl
 import com.vadymmy.ricktionary.data.characters.local.dao.CharactersDao
+import com.vadymmy.ricktionary.data.characters.local.dao.CharactersRemoteKeysDao
 import com.vadymmy.ricktionary.data.characters.local.db.CharactersDatabase
 import com.vadymmy.ricktionary.data.characters.local.model.CharacterWithRelationsEntity
 import com.vadymmy.ricktionary.data.characters.local.source.CharactersLocalDataSource
@@ -36,7 +37,15 @@ class CharactersDataModule {
 
     @Provides
     @Singleton
-    fun provideCharactersDao(charactersDatabase: CharactersDatabase): CharactersDao = charactersDatabase.charactersDao()
+    fun provideCharactersDao(charactersDatabase: CharactersDatabase): CharactersDao {
+        return charactersDatabase.charactersDao()
+    }
+
+    @Provides
+    @Singleton
+    fun provideCharactersRemoteKeysDao(charactersDatabase: CharactersDatabase): CharactersRemoteKeysDao {
+        return charactersDatabase.charactersRemoteKeysDao()
+    }
 
     @Provides
     @Singleton
@@ -55,7 +64,7 @@ class CharactersDataModule {
     fun provideCharactersPager(
         charactersRemoteMediator: CharactersRemoteMediator,
         charactersLocalDataSource: CharactersLocalDataSource
-    ) : Pager<Int, CharacterWithRelationsEntity> {
+    ): Pager<Int, CharacterWithRelationsEntity> {
         return Pager(
             config = PagingConfig(pageSize = CHARACTERS_PAGE_SIZE),
             remoteMediator = charactersRemoteMediator,

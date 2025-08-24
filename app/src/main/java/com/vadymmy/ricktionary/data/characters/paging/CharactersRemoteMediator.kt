@@ -5,6 +5,7 @@ import androidx.paging.LoadType
 import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
 import com.vadymmy.ricktionary.data.characters.local.db.CharactersTransactionProvider
+import com.vadymmy.ricktionary.data.characters.local.model.CharacterPageRemoteKeysEntity
 import com.vadymmy.ricktionary.data.characters.local.model.CharacterWithRelationsEntity
 import com.vadymmy.ricktionary.data.characters.local.source.CharactersLocalDataSource
 import com.vadymmy.ricktionary.data.characters.remote.mapper.toEntityModel
@@ -14,6 +15,7 @@ import com.vadymmy.ricktionary.data.characters.remote.source.CharactersRemoteDat
 import javax.inject.Inject
 
 private const val FIRST_PAGE = 1
+private const val PAGE_URL_DELIMITER = "page="
 
 @OptIn(ExperimentalPagingApi::class)
 class CharactersRemoteMediator @Inject constructor(
@@ -28,28 +30,46 @@ class CharactersRemoteMediator @Inject constructor(
     ): MediatorResult {
         val page = when (loadType) {
             LoadType.REFRESH -> FIRST_PAGE
-            LoadType.PREPEND -> return MediatorResult.Success(endOfPaginationReached = true)
-            LoadType.APPEND -> {
-                val loadedPagesNumber = state.pages.sumOf { it.data.size }
-                val currentPage = (loadedPagesNumber / state.config.pageSize).coerceAtLeast(FIRST_PAGE)
 
-                currentPage + 1
+            LoadType.PREPEND -> {
+                val firstPage = localDataSource.getFirstCharacterRemoteKeysPage()
+                val remoteKey = firstPage?.let { localDataSource.getCharacterPageRemoteKeys(it) }
+                val previousPage = remoteKey?.previousPage ?: return MediatorResult.Success(endOfPaginationReached = true)
+
+                previousPage
+            }
+
+            LoadType.APPEND -> {
+                val lastPage = localDataSource.getLastCharacterRemoteKeysPage()
+                val remoteKey = lastPage?.let { localDataSource.getCharacterPageRemoteKeys(it) }
+                val nextPage = remoteKey?.nextPage ?: return MediatorResult.Success(endOfPaginationReached = true)
+
+                nextPage
             }
         }
 
         return try {
             val response = remoteDataSource.getCharacters(page)
-            val isLastPage = response.info.nextPageUrl == null
+            val characterPageRemoteKeys = CharacterPageRemoteKeysEntity(
+                page = page,
+                previousPage = response.info.previousPageUrl.extractPageNumber(),
+                nextPage = response.info.nextPageUrl.extractPageNumber()
+            )
 
             charactersTransactionProvider.runAsTransaction {
-                if (loadType == LoadType.REFRESH) localDataSource.clearCharacters()
+                if (loadType == LoadType.REFRESH) {
+                    localDataSource.clearCharacters()
+                    localDataSource.clearCharactersPageRemoteKeys()
+                }
+
+                localDataSource.insertCharacterPageRemoteKeys(characterPageRemoteKeys)
 
                 response.characters.forEach { characterDto ->
                     saveCharacterToDB(character = characterDto)
                 }
             }
 
-            MediatorResult.Success(endOfPaginationReached = isLastPage)
+            MediatorResult.Success(endOfPaginationReached = characterPageRemoteKeys.nextPage == null)
         } catch (e: Exception) {
             MediatorResult.Error(e)
         }
@@ -68,4 +88,6 @@ class CharactersRemoteMediator @Inject constructor(
             episodes = characterEpisodes
         )
     }
+
+    private fun String?.extractPageNumber(): Int? = this?.substringAfter(PAGE_URL_DELIMITER)?.toIntOrNull()
 }

@@ -4,5 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class CharacterResponseInfo(
     @SerializedName("next")
-    val nextPageUrl: String?
+    val nextPageUrl: String?,
+    @SerializedName("prev")
+    val previousPageUrl: String?
 )
