@@ -13,6 +13,8 @@ class CharactersLocalDataSourceImpl @Inject constructor(
 ) : CharactersLocalDataSource {
     override val charactersFlow = charactersDao.getAllCharactersFlow()
 
+    override suspend fun areCharactersSaved() = charactersDao.getSavedCharactersNumber() > 0
+
     override suspend fun getCharacterById(id: Int) = charactersDao.getCharacterById(characterId = id)
 
     override suspend fun insertCharacter(

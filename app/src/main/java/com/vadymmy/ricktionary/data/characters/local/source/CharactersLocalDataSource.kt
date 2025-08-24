@@ -10,6 +10,8 @@ import kotlinx.coroutines.flow.Flow
 interface CharactersLocalDataSource {
     val charactersFlow: Flow<List<CharacterWithRelationsEntity>>
 
+    suspend fun areCharactersSaved(): Boolean
+
     suspend fun getCharacterById(id: Int): CharacterWithRelationsEntity?
 
     suspend fun insertCharacter(

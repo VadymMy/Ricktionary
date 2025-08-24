@@ -20,6 +20,10 @@ interface CharactersDao {
     fun getAllCharactersFlow(): Flow<List<CharacterWithRelationsEntity>>
 
     @Transaction
+    @Query("SELECT COUNT(*) FROM ${CharacterEntity.TABLE_NAME}")
+    fun getSavedCharactersNumber(): Int
+
+    @Transaction
     @Query("SELECT * FROM ${CharacterEntity.TABLE_NAME} WHERE id = :characterId")
     suspend fun getCharacterById(characterId: Int): CharacterWithRelationsEntity?
 

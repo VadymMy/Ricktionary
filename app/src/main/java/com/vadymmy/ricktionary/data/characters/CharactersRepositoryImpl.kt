@@ -21,6 +21,8 @@ class CharactersRepositoryImpl @Inject constructor(
         it.toDomainModels()
     }
 
+    override suspend fun areCharactersSaved() = charactersLocalDataSource.areCharactersSaved()
+
     override suspend fun fetchCharacters() {
         val response = charactersRemoteDataSource.getCharacters()
 
