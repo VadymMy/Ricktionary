@@ -1,5 +1,6 @@
 package com.vadymmy.ricktionary.ui.characters.list
 
+import com.vadymmy.ricktionary.domain.characters.usecase.AreCharactersSavedLocallyUseCase
 import com.vadymmy.ricktionary.domain.characters.usecase.FetchCharactersUseCase
 import com.vadymmy.ricktionary.domain.characters.usecase.GetCharactersFlowUseCase
 import com.vadymmy.ricktionary.ui.base.BaseViewModel
@@ -12,6 +13,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CharactersViewModel @Inject constructor(
+    private val areCharactersSavedLocallyUseCase: AreCharactersSavedLocallyUseCase,
     private val getCharactersFlowUseCase: GetCharactersFlowUseCase,
     private val fetchCharactersUseCase: FetchCharactersUseCase,
     private val appNavigator: AppNavigator
@@ -22,7 +24,12 @@ class CharactersViewModel @Inject constructor(
     }
 
     override fun onCreate() {
-        fetchCharacters()
+        launchViewModelScope {
+            val areCharacterSaved = areCharactersSavedLocallyUseCase().getOrNull() == true
+            if (uiState.characters.isEmpty() && !areCharacterSaved) {
+                fetchCharacters()
+            }
+        }
     }
 
     override fun reduceIntent(intent: CharactersIntent) {
@@ -39,7 +46,10 @@ class CharactersViewModel @Inject constructor(
         launchViewModelScope {
             getCharactersFlowUseCase().collectLatest { characters ->
                 updateUiState {
-                    it.copy(characters = characters.toItemUiModels())
+                    it.copy(
+                        isLoading = false,
+                        characters = characters.toItemUiModels()
+                    )
                 }
             }
         }
