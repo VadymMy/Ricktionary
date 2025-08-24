@@ -57,11 +57,6 @@ class CharactersRemoteMediator @Inject constructor(
             )
 
             charactersTransactionProvider.runAsTransaction {
-                if (loadType == LoadType.REFRESH) {
-                    localDataSource.clearCharacters()
-                    localDataSource.clearCharactersPageRemoteKeys()
-                }
-
                 localDataSource.insertCharacterPageRemoteKeys(characterPageRemoteKeys)
 
                 response.characters.forEach { characterDto ->
