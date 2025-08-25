@@ -20,7 +20,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.vadymmy.ricktionary.R
 import com.vadymmy.ricktionary.ui.theme.Typography
 import com.vadymmy.ricktionary.ui.theme.margin2X
-import com.vadymmy.ricktionary.ui.theme.topBarImageSize
+import com.vadymmy.ricktionary.ui.theme.defaultImageSize
 
 @Composable
 fun FeedbackState(
@@ -58,7 +58,7 @@ fun FeedbackState(
 private fun FeedbackStatePreview() {
     Box(modifier = Modifier.background(color = Color.White)) {
         FeedbackState(
-            imageModifier = Modifier.size(topBarImageSize),
+            imageModifier = Modifier.size(defaultImageSize),
             title = "Location unknown",
             subtitle = "Please try again.",
             painter = painterResource(id = R.drawable.ic_location)

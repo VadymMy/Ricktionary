@@ -28,4 +28,7 @@ object AppColors {
     val TextPrimary = Color(0xFF212121)
     val TextSecondary = Color(0xFF616161)
     val TextDark = Color(0xFF141414)
+
+    // Buttons
+    val ButtonDisabled = Color(0x33607D8B)
 }

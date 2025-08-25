@@ -21,7 +21,7 @@ import com.vadymmy.ricktionary.ui.theme.AppColors
 import com.vadymmy.ricktionary.ui.theme.Typography
 import com.vadymmy.ricktionary.ui.theme.marginHalf
 import com.vadymmy.ricktionary.ui.theme.topBarHeight
-import com.vadymmy.ricktionary.ui.theme.topBarImageSize
+import com.vadymmy.ricktionary.ui.theme.defaultImageSize
 
 @Composable
 fun TopBarScaffold(
@@ -67,7 +67,7 @@ private fun TopBarWithIconPreview() {
             title = "Locations",
             leadingContent = {
                 Icon(
-                    modifier = Modifier.size(topBarImageSize),
+                    modifier = Modifier.size(defaultImageSize),
                     painter = painterResource(id = R.drawable.ic_location),
                     contentDescription = null
                 )
