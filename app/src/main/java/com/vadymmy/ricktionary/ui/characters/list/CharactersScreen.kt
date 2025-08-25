@@ -73,7 +73,9 @@ private fun CharactersScreenContent(
             )
         },
         errorState = {
-            CharacterErrorState()
+            CharacterErrorState(onRetryClicked = {
+                characters.retry()
+            })
         }
     )
 }

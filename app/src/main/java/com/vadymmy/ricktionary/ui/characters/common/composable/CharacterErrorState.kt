@@ -21,7 +21,7 @@ import com.vadymmy.ricktionary.ui.theme.errorStateImageHeight
 import com.vadymmy.ricktionary.ui.theme.margin2X
 
 @Composable
-fun CharacterErrorState(onRetryClick: () -> Unit = {}) {
+fun CharacterErrorState(onRetryClicked: () -> Unit = {}) {
     Box(modifier = Modifier.fillMaxSize()) {
         FeedbackState(
             imageModifier = Modifier.height(errorStateImageHeight),
@@ -42,7 +42,7 @@ fun CharacterErrorState(onRetryClick: () -> Unit = {}) {
                     contentDescription = stringResource(id = R.string.retry)
                 )
             },
-            onClick = onRetryClick
+            onClick = onRetryClicked
         )
     }
 }
