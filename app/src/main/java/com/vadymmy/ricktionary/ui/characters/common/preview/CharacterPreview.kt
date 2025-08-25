@@ -1,6 +1,8 @@
 package com.vadymmy.ricktionary.ui.characters.common.preview
 
 import androidx.compose.runtime.Composable
+import androidx.paging.LoadState
+import androidx.paging.LoadStates
 import androidx.paging.PagingData
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.collectAsLazyPagingItems
@@ -60,7 +62,16 @@ object CharacterPreview {
     )
 
     @Composable
-    fun getLazyCharacterItems(): LazyPagingItems<CharacterItemUiModel> {
-        return flowOf(PagingData.from(characterItems)).collectAsLazyPagingItems()
+    fun getLazyCharacterItems(areItemsPresent: Boolean, loadState: LoadState): LazyPagingItems<CharacterItemUiModel> {
+        return flowOf(
+            PagingData.from(
+                data = characterItems.takeIf { areItemsPresent }.orEmpty(),
+                sourceLoadStates = LoadStates(
+                    append = loadState,
+                    prepend = loadState,
+                    refresh = loadState
+                )
+            )
+        ).collectAsLazyPagingItems()
     }
 }

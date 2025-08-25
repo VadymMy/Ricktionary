@@ -111,8 +111,10 @@ private fun CharactersScreenScaffold(
 @Preview
 private fun EmptyCharactersScreenPreview() {
     CharactersScreenContent(
-        characters = CharacterPreview.getLazyCharacterItems(),
-        onUserIntent = {}
+        characters = CharacterPreview.getLazyCharacterItems(
+            areItemsPresent = false,
+            loadState = LoadState.NotLoading(endOfPaginationReached = true)
+        )
     )
 }
 
@@ -120,7 +122,10 @@ private fun EmptyCharactersScreenPreview() {
 @Preview
 private fun ErrorCharactersScreenPreview() {
     CharactersScreenContent(
-        characters = CharacterPreview.getLazyCharacterItems()
+        characters = CharacterPreview.getLazyCharacterItems(
+            areItemsPresent = false,
+            loadState = LoadState.Error(Exception("Loading error"))
+        )
     )
 }
 
@@ -128,7 +133,10 @@ private fun ErrorCharactersScreenPreview() {
 @Preview
 private fun LoadingCharactersScreenPreview() {
     CharactersScreenContent(
-        characters = CharacterPreview.getLazyCharacterItems()
+        characters = CharacterPreview.getLazyCharacterItems(
+            areItemsPresent = false,
+            loadState = LoadState.Loading
+        )
     )
 }
 
@@ -136,6 +144,9 @@ private fun LoadingCharactersScreenPreview() {
 @Preview
 private fun CharactersScreenPreview() {
     CharactersScreenContent(
-        characters = CharacterPreview.getLazyCharacterItems()
+        characters = CharacterPreview.getLazyCharacterItems(
+            areItemsPresent = true,
+            loadState = LoadState.NotLoading(endOfPaginationReached = false)
+        )
     )
 }

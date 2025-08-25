@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import com.vadymmy.ricktionary.ui.characters.list.model.CharacterItemUiModel
 import com.vadymmy.ricktionary.ui.characters.common.preview.CharacterPreview
@@ -40,7 +41,10 @@ fun CharactersList(
 private fun CharactersListLoadingPreview() {
     CharactersList(
         isLoading = true,
-        characters = CharacterPreview.getLazyCharacterItems()
+        characters = CharacterPreview.getLazyCharacterItems(
+            areItemsPresent = false,
+            loadState = LoadState.Loading
+        )
     )
 }
 
@@ -49,6 +53,9 @@ private fun CharactersListLoadingPreview() {
 private fun CharactersListPreview() {
     CharactersList(
         isLoading = false,
-        characters = CharacterPreview.getLazyCharacterItems()
+        characters = CharacterPreview.getLazyCharacterItems(
+            areItemsPresent = true,
+            loadState = LoadState.NotLoading(endOfPaginationReached = false)
+        )
     )
 }
