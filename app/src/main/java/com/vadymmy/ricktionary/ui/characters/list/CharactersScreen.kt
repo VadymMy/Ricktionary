@@ -5,8 +5,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -29,7 +27,6 @@ import com.vadymmy.ricktionary.ui.theme.margin2X
 
 @Composable
 fun CharactersScreen(charactersViewModel: CharactersViewModel = hiltViewModel()) {
-    val uiState by charactersViewModel.uiStateFlow.collectAsState()
     val characters = charactersViewModel.charactersFlow.collectAsLazyPagingItems()
 
     LifecycleEffect(onCreate = {
@@ -37,7 +34,6 @@ fun CharactersScreen(charactersViewModel: CharactersViewModel = hiltViewModel())
     })
 
     CharactersScreenContent(
-        uiState = uiState,
         characters = characters,
         onUserIntent = charactersViewModel::onUserIntent
     )
@@ -45,12 +41,10 @@ fun CharactersScreen(charactersViewModel: CharactersViewModel = hiltViewModel())
 
 @Composable
 private fun CharactersScreenContent(
-    uiState: CharactersUiState,
     characters: LazyPagingItems<CharacterItemUiModel>,
     onUserIntent: (CharactersIntent) -> Unit = {}
 ) {
     CharactersScreenScaffold(
-        uiState = uiState,
         characters = characters,
         topBar = {
             TopBarScaffold(title = stringResource(id = R.string.characters_screen_title))
@@ -82,7 +76,6 @@ private fun CharactersScreenContent(
 
 @Composable
 private fun CharactersScreenScaffold(
-    uiState: CharactersUiState,
     characters: LazyPagingItems<CharacterItemUiModel>,
     topBar: @Composable () -> Unit = {},
     content: @Composable (isLoading: Boolean) -> Unit = {},
@@ -118,7 +111,6 @@ private fun CharactersScreenScaffold(
 @Preview
 private fun EmptyCharactersScreenPreview() {
     CharactersScreenContent(
-        uiState = CharactersUiState(),
         characters = CharacterPreview.getLazyCharacterItems(),
         onUserIntent = {}
     )
@@ -128,7 +120,6 @@ private fun EmptyCharactersScreenPreview() {
 @Preview
 private fun ErrorCharactersScreenPreview() {
     CharactersScreenContent(
-        uiState = CharactersUiState(),
         characters = CharacterPreview.getLazyCharacterItems()
     )
 }
@@ -137,7 +128,6 @@ private fun ErrorCharactersScreenPreview() {
 @Preview
 private fun LoadingCharactersScreenPreview() {
     CharactersScreenContent(
-        uiState = CharactersUiState(),
         characters = CharacterPreview.getLazyCharacterItems()
     )
 }
@@ -146,7 +136,6 @@ private fun LoadingCharactersScreenPreview() {
 @Preview
 private fun CharactersScreenPreview() {
     CharactersScreenContent(
-        uiState = CharactersUiState(),
         characters = CharacterPreview.getLazyCharacterItems()
     )
 }
