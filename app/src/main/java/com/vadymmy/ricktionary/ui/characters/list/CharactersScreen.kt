@@ -52,13 +52,10 @@ private fun CharactersScreenContent(
         content = { isLoading ->
             CharactersList(
                 isLoading = isLoading,
-                characters = characters.itemSnapshotList.items,
-                onPulledToRefresh = {
-                    characters.refresh()
-                },
-                onCharacterClicked = {
-                    onUserIntent(CharactersIntent.CharacterItemClicked(it))
-                }
+                charactersCount = characters.itemCount,
+                getCharacter = { characters[it] },
+                onPulledToRefresh = { characters.refresh() },
+                onCharacterClicked = { onUserIntent(CharactersIntent.CharacterItemClicked(it)) }
             )
         },
         emptyState = {
