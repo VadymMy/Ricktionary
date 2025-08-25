@@ -4,6 +4,7 @@
     <!-- Common -->
     <string name="unknown">Unknown</string>
     <string name="back">Back</string>
+    <string name="retry">Retry</string>
 
     <!-- Characters Screen -->
     <string name="characters_screen_title">Characters</string>

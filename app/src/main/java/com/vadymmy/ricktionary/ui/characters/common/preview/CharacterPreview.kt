@@ -1,9 +1,16 @@
 package com.vadymmy.ricktionary.ui.characters.common.preview
 
+import androidx.compose.runtime.Composable
+import androidx.paging.LoadState
+import androidx.paging.LoadStates
+import androidx.paging.PagingData
+import androidx.paging.compose.LazyPagingItems
+import androidx.paging.compose.collectAsLazyPagingItems
 import com.vadymmy.ricktionary.ui.characters.common.model.CharacterGenderUiModel
 import com.vadymmy.ricktionary.ui.characters.list.model.CharacterItemUiModel
 import com.vadymmy.ricktionary.ui.characters.common.model.CharacterStatusUiModel
 import com.vadymmy.ricktionary.ui.characters.details.model.CharacterUiModel
+import kotlinx.coroutines.flow.flowOf
 
 object CharacterPreview {
     val character = CharacterUiModel(
@@ -53,4 +60,18 @@ object CharacterPreview {
             gender = CharacterGenderUiModel.Unknown
         )
     )
+
+    @Composable
+    fun getLazyCharacterItems(areItemsPresent: Boolean, loadState: LoadState): LazyPagingItems<CharacterItemUiModel> {
+        return flowOf(
+            PagingData.from(
+                data = characterItems.takeIf { areItemsPresent }.orEmpty(),
+                sourceLoadStates = LoadStates(
+                    append = loadState,
+                    prepend = loadState,
+                    refresh = loadState
+                )
+            )
+        ).collectAsLazyPagingItems()
+    }
 }

@@ -5,7 +5,7 @@ import com.vadymmy.ricktionary.data.characters.remote.model.CharactersResponse
 
 interface CharactersRemoteDataSource {
 
-    suspend fun getCharacters(): CharactersResponse
+    suspend fun getCharacters(page: Int): CharactersResponse
 
     suspend fun getCharacter(id: Int): CharacterDto
 }

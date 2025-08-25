@@ -16,9 +16,9 @@ class CharacterDetailsViewModel @Inject constructor(
     private val getCharacterUseCase: GetCharacterUseCase,
     private val appNavigator: AppNavigator
 ) : BaseViewModel<CharacterDetailsUiState, CharacterDetailsIntent, Nothing>(CharacterDetailsUiState()) {
+    private val characterId = savedStateHandle.toRoute<AppNavRoute.CharacterDetails>().id
 
     init {
-        val characterId = savedStateHandle.toRoute<AppNavRoute.CharacterDetails>().id
         loadCharacter(characterId = characterId)
     }
 
@@ -26,6 +26,7 @@ class CharacterDetailsViewModel @Inject constructor(
         launchViewModelScope {
             when (intent) {
                 CharacterDetailsIntent.BackButtonClicked -> appNavigator.back()
+                CharacterDetailsIntent.RetryButtonClicked -> loadCharacter(characterId = characterId)
             }
         }
     }

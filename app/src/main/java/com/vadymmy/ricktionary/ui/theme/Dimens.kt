@@ -26,12 +26,14 @@ val emptyStateImageHeight = 180.dp
 val errorStateImageHeight = 100.dp
 val characterItemImageSize = 120.dp
 val genderPillImageSize = 10.dp
-val topBarImageSize = 24.dp
 val characterAttributeImageSize = 16.dp
+val defaultImageSize = 24.dp
+val buttonImageSize = 16.dp
 
 // Containers
 val pillContainerHeight = 24.dp
 val topBarHeight = 56.dp
+val buttonHeight = 56.dp
 
 // Other items
 val statusPillCircleSize = 10.dp

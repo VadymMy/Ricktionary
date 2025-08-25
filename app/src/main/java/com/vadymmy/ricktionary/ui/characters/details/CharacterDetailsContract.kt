@@ -10,4 +10,5 @@ data class CharacterDetailsUiState(
 
 sealed interface CharacterDetailsIntent {
     data object BackButtonClicked : CharacterDetailsIntent
+    data object RetryButtonClicked : CharacterDetailsIntent
 }

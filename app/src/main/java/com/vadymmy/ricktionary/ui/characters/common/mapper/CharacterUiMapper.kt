@@ -1,5 +1,7 @@
 package com.vadymmy.ricktionary.ui.characters.common.mapper
 
+import androidx.paging.PagingData
+import androidx.paging.map
 import com.vadymmy.ricktionary.domain.characters.model.Character
 import com.vadymmy.ricktionary.domain.characters.model.CharacterGender
 import com.vadymmy.ricktionary.domain.characters.model.CharacterStatus
@@ -8,7 +10,7 @@ import com.vadymmy.ricktionary.ui.characters.common.model.CharacterStatusUiModel
 import com.vadymmy.ricktionary.ui.characters.details.model.CharacterUiModel
 import com.vadymmy.ricktionary.ui.characters.list.model.CharacterItemUiModel
 
-fun List<Character>.toItemUiModels(): List<CharacterItemUiModel> = this.map { it.toItemUiModel() }
+fun PagingData<Character>.toItemUiModels(): PagingData<CharacterItemUiModel> = this.map { it.toItemUiModel() }
 
 fun Character.toUiModel() = CharacterUiModel(
     id = this.id,
