@@ -58,7 +58,9 @@ private fun CharacterDetailsScreenContent(
             CharacterDetails(character = it)
         },
         errorState = {
-            CharacterErrorState()
+            CharacterErrorState(onRetryClicked = {
+                onUserIntent(CharacterDetailsIntent.RetryButtonClicked)
+            })
         }
     )
 }
