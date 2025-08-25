@@ -21,7 +21,7 @@ interface CharactersDao {
 
     @Transaction
     @Query("SELECT COUNT(*) FROM ${CharacterEntity.TABLE_NAME}")
-    fun getSavedCharactersNumber(): Int
+    suspend fun getSavedCharactersNumber(): Int
 
     @Transaction
     @Query("SELECT * FROM ${CharacterEntity.TABLE_NAME} WHERE id = :characterId")

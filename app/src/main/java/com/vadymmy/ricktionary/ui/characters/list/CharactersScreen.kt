@@ -87,6 +87,10 @@ private fun CharactersScreenScaffold(
     emptyState: @Composable () -> Unit = {},
     errorState: @Composable () -> Unit = {}
 ) {
+    val loadState = characters.loadState
+    val areItemsPresent = characters.itemCount > 0
+    val isEndOfPagination = characters.loadState.append.endOfPaginationReached
+
     Scaffold(containerColor = AppColors.Background) { paddingValues ->
         Column(
             modifier = Modifier
@@ -95,18 +99,14 @@ private fun CharactersScreenScaffold(
         ) {
             topBar()
 
-            when (characters.loadState.refresh) {
-                is LoadState.Error -> errorState()
+            when {
+                loadState.refresh is LoadState.Error && !areItemsPresent -> errorState()
 
-                LoadState.Loading -> content(true)
+                loadState.refresh is LoadState.NotLoading && !areItemsPresent && isEndOfPagination -> emptyState()
 
-                is LoadState.NotLoading -> {
-                    if (characters.itemCount > 0) {
-                        content(false)
-                    } else {
-                        emptyState()
-                    }
-                }
+                loadState.refresh is LoadState.NotLoading && areItemsPresent -> content(false)
+
+                else -> content(true)
             }
         }
     }

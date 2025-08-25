@@ -24,6 +24,14 @@ class CharactersRemoteMediator @Inject constructor(
     private val charactersTransactionProvider: CharactersTransactionProvider
 ) : RemoteMediator<Int, CharacterWithRelationsEntity>() {
 
+    override suspend fun initialize(): InitializeAction {
+        return if (localDataSource.areCharactersSaved()) {
+            InitializeAction.SKIP_INITIAL_REFRESH
+        } else {
+            InitializeAction.LAUNCH_INITIAL_REFRESH
+        }
+    }
+
     override suspend fun load(
         loadType: LoadType,
         state: PagingState<Int, CharacterWithRelationsEntity>
@@ -57,6 +65,11 @@ class CharactersRemoteMediator @Inject constructor(
             )
 
             charactersTransactionProvider.runAsTransaction {
+                if (loadType == LoadType.REFRESH) {
+                    localDataSource.clearCharacters()
+                    localDataSource.clearCharactersPageRemoteKeys()
+                }
+
                 localDataSource.insertCharacterPageRemoteKeys(characterPageRemoteKeys)
 
                 response.characters.forEach { characterDto ->
