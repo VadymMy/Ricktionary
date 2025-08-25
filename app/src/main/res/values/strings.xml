@@ -1,3 +1,32 @@
 <resources>
     <string name="app_name">Ricktionary</string>
+
+    <!-- Common -->
+    <string name="unknown">Unknown</string>
+    <string name="back">Back</string>
+    <string name="retry">Retry</string>
+
+    <!-- Characters Screen -->
+    <string name="characters_screen_title">Characters</string>
+
+    <!-- Character Details Screen -->
+    <string name="character_details_screen_title">Details</string>
+    <string name="character_details_origin_title">Origin</string>
+    <string name="character_details_location_title">Location</string>
+    <string name="character_details_episodes_number">Episodes: %d</string>
+
+    <!-- Characters Empty State -->
+    <string name="empty_state_title">No characters found</string>
+    <string name="empty_state_subtitle">This corner of the multiverse is empty.</string>
+
+    <!-- Characters Error State -->
+    <string name="error_state_title">Can’t fetch characters</string>
+    <string name="error_state_subtitle">Maybe Morty unplugged the cable?</string>
+
+    <!-- Character -->
+    <string name="character_status_alive">Alive</string>
+    <string name="character_status_dead">Dead</string>
+    <string name="character_gender_male">Male</string>
+    <string name="character_gender_female">Female</string>
+    <string name="character_gender_genderless">Genderless</string>
 </resources>
